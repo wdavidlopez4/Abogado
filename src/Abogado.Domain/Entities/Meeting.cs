@@ -15,5 +15,16 @@ namespace Abogado.Domain.Entities
         public User Lawyer { get; }
 
         public DateTime Date { get;}
+
+        private Meeting(Guid userId, DateTime date)
+        {
+            UserId = userId;
+            Date = date;
+        }
+
+        public static Meeting Build(Guid userId, DateTime date)
+        {
+            return new Meeting(userId, date);
+        }
     }
 }
