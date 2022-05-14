@@ -20,7 +20,6 @@
     <Folder Include="CasesServices\ModifyCase\" />
     <Folder Include="CasesServices\GetByCaseId\" />
     <Folder Include="CasesServices\GetAllCasesByUser\" />
-    <Folder Include="MeetingServices\CreateMeeting\" />
     <Folder Include="MeetingServices\ModifyMeeting\" />
     <Folder Include="MeetingServices\GetByMeetingId\" />
     <Folder Include="MeetingServices\GetAllMeetingByUser\" />

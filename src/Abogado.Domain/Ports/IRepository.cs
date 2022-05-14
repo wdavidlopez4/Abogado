@@ -16,7 +16,7 @@ namespace Abogado.Domain.Ports
 
         public T Exists<T>(Expression<Func<bool, T>> expression) where T : Entity;
 
-        public Task Commit<T>() where T : Entity;
+        public Task Commit();
 
         public Task<T> Get<T>(Expression<Func<bool, T>> expression) where T : Entity; 
     }
