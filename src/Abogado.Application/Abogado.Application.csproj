@@ -19,11 +19,11 @@
     <Folder Include="CasesServices\CreateCase\" />
     <Folder Include="CasesServices\ModifyCase\" />
     <Folder Include="CasesServices\GetByCaseId\" />
-    <Folder Include="CasesServices\GetAllCasesByUserOrLawyer\" />
+    <Folder Include="CasesServices\GetAllCasesByUser\" />
     <Folder Include="MeetingServices\CreateMeeting\" />
     <Folder Include="MeetingServices\ModifyMeeting\" />
     <Folder Include="MeetingServices\GetByMeetingId\" />
-    <Folder Include="MeetingServices\GetAllMeetingByUserOrLawyer\" />
+    <Folder Include="MeetingServices\GetAllMeetingByUser\" />
     <Folder Include="UsersServices\GetUserId\" />
     <Folder Include="UsersServices\GetAllUserByName\" />
     <Folder Include="UsersServices\ModifyUser\" />
