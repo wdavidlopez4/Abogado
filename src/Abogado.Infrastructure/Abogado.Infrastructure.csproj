@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Abogado.Application\Abogado.Application.csproj" />
+  </ItemGroup>
+
 </Project>
