@@ -10,11 +10,7 @@ namespace Abogado.Domain.Entities
 {
     public class Case : Entity
     {
-        public Guid UserId { get; }
-
-        public User User { get; }
-
-        public User Lawyer { get; }
+        public List<UserCase> Users { get; private set; }
 
         public List<Case> CaseHistory { get; }
 
@@ -34,10 +30,14 @@ namespace Abogado.Domain.Entities
 
         public DateTime StartDate { get; }
 
-        private Case(Guid userId, string caseName, string description, Trial trial, DivorceForm divorceForm,
+        private Case()
+        {
+
+        }
+
+        private Case(string caseName, string description, Trial trial, DivorceForm divorceForm,
             DivorceMechanism divorceMechanism, Guid fileId, DateTime startDate)
         {
-            UserId = userId;
             CaseName = Guard.Against.NullOrEmpty(caseName, nameof(caseName));
             Description = Guard.Against.NullOrEmpty(description);
             Trial = trial;
@@ -45,17 +45,47 @@ namespace Abogado.Domain.Entities
             DivorceMechanism = divorceMechanism;
             FileId = fileId;
             StartDate = startDate;
+
+            this.Users = new();
         }
 
-        public static Case Build(Guid userId, string caseName, string description, Trial trial, DivorceForm divorceForm,
+        public static Case Build(string caseName, string description, Trial trial, DivorceForm divorceForm,
             DivorceMechanism divorceMechanism, Guid fileId, DateTime startDate)
         {
-            return new Case(userId, caseName, description, trial, divorceForm, divorceMechanism, fileId, startDate);
+            return new Case(caseName, description, trial, divorceForm, divorceMechanism, fileId, startDate);
         }
 
-        public void AddCase(Case caseHistory)
+        public void AddCaseHistory(Case caseHistory)
         {
             CaseHistory.Add(caseHistory);
+        }
+
+        public void AddLawyer(User user)
+        {
+            if(Users is null)
+                this.Users = new List<UserCase>();
+
+            if (Users.Count >= 2)
+                throw new Exception("solamnete puede tener dos objetos.");
+
+            else if (Users.Any(x => x.User.Role == Role.abogado))
+                throw new Exception("solo puede tener un abogado");
+
+            Users.Add(UserCase.Build(user, this));
+        }
+
+        public void AddUser(User user)
+        {
+            if (Users is null)
+                this.Users = new List<UserCase>();
+
+            if (Users.Count >= 2)
+                throw new Exception("solamnete puede tener dos objetos.");
+
+            else if (Users.Any(x => x.User.Role == Role.cliente || x.User.Role == Role.aux))
+                throw new Exception("solo puede tener un cliente o aux");
+
+            Users.Add(UserCase.Build(user, this));
         }
     }
 

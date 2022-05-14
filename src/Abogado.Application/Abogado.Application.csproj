@@ -7,7 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Abogado.Domain\Abogado.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CasesServices\CreateCase\" />
+    <Folder Include="CasesServices\ModifyCase\" />
+    <Folder Include="CasesServices\GetByCaseId\" />
+    <Folder Include="CasesServices\GetAllCasesByUserOrLawyer\" />
+    <Folder Include="MeetingServices\CreateMeeting\" />
+    <Folder Include="MeetingServices\ModifyMeeting\" />
+    <Folder Include="MeetingServices\GetByMeetingId\" />
+    <Folder Include="MeetingServices\GetAllMeetingByUserOrLawyer\" />
+    <Folder Include="UsersServices\GetUserId\" />
+    <Folder Include="UsersServices\GetAllUserByName\" />
+    <Folder Include="UsersServices\ModifyUser\" />
+    <Folder Include="UsersServices\Register\" />
   </ItemGroup>
 
 </Project>
