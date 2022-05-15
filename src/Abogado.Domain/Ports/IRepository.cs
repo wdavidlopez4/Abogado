@@ -22,6 +22,8 @@ namespace Abogado.Domain.Ports
 
         public Task<T> GetNested<T>(Expression<Func<T, bool>> expression, string nested, string nestedSecond) where T : Entity;
 
+        public Task<T> GetNested<T>(Expression<Func<T, bool>> expression, string nested) where T : Entity;
+
         public Task<List<T>> GetAll<T>(Expression<Func<T, string>> sort, int page, int pageSize,
            Expression<Func<T, bool>> expressionConditional) where T : Entity;
 
