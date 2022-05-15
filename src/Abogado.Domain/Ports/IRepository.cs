@@ -18,6 +18,8 @@ namespace Abogado.Domain.Ports
 
         public Task Commit();
 
-        public Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : Entity; 
+        public Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : Entity;
+
+        public Task<T> GetNested<T>(Expression<Func<T, bool>> expression, string nested, string nestedSecond) where T : Entity;
     }
 }

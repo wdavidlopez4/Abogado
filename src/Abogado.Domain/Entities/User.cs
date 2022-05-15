@@ -12,7 +12,7 @@ namespace Abogado.Domain.Entities
     {
         public List<Case> Cases { get;}
 
-        public List<Case> Meeting { get; }
+        public List<Meeting> Meetings { get; }
 
         public Role Role { get; }
 

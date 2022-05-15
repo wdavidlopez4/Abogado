@@ -27,6 +27,7 @@ namespace Abogado.Application.UsersServices.ModifyUser
             //Verificar que la peticion no este nula
             Guard.Against.Null(request, nameof(request));
 
+            //Verificar si el usuario existe, si existe obtenerlo
             if (repository.Exists<User>(x => x.Email == request.Mail) is false)
                 throw new Exception("El Usuario no se encuentra registrado");
 
