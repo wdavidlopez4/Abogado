@@ -24,7 +24,6 @@
     <Folder Include="MeetingServices\GetAllMeetingByUser\" />
     <Folder Include="UsersServices\GetUserId\" />
     <Folder Include="UsersServices\GetAllUserByName\" />
-    <Folder Include="UsersServices\ModifyUser\" />
   </ItemGroup>
 
 </Project>

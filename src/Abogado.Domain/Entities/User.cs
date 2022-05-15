@@ -42,5 +42,12 @@ namespace Abogado.Domain.Entities
         {
             return new User(role, name, lastname, email, encriptPassword);
         }
+
+        public void ChangeAtributtes(string name, string lastName, string email)
+        {
+            Name = Guard.Against.NullOrEmpty(name, nameof(name));
+            Lastname = Guard.Against.NullOrEmpty(lastName, nameof(lastName));
+            Email = Guard.Against.NullOrEmpty(email, nameof(email));  
+        }
     }
 }
