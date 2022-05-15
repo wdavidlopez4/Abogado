@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Abogado.Domain\Abogado.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CasesServices\GetAllCasesByUser\" />
-  </ItemGroup>
-
 </Project>
