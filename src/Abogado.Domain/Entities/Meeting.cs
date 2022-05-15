@@ -11,7 +11,7 @@ namespace Abogado.Domain.Entities
     {
         public List<UserMeeting> Users { get; private set; }
 
-        public DateTime Date { get;}
+        public DateTime Date { get; private set; }
 
         private Meeting()
         {
@@ -54,6 +54,11 @@ namespace Abogado.Domain.Entities
                 throw new Exception("solo puede tener un cliente o aux");
 
             Users.Add(UserMeeting.Build(user, this));
+        }
+
+        public void ChangeAttributes(DateTime date)
+        {
+            this.Date = date;
         }
     }
 }

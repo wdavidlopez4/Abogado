@@ -14,10 +14,10 @@ namespace Abogado.Domain.Ports
 
         public Task Update<T>(T obj) where T : Entity;
 
-        public T Exists<T>(Expression<Func<bool, T>> expression) where T : Entity;
+        public bool Exists<T>(Expression<Func<T, bool>> expression) where T : Entity;
 
         public Task Commit();
 
-        public Task<T> Get<T>(Expression<Func<bool, T>> expression) where T : Entity; 
+        public Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : Entity; 
     }
 }
