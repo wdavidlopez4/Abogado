@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CasesServices\ModifyCase\" />
     <Folder Include="CasesServices\GetByCaseId\" />
     <Folder Include="CasesServices\GetAllCasesByUser\" />
   </ItemGroup>

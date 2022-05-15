@@ -14,9 +14,9 @@ namespace Abogado.Domain.Entities
 
         public List<Case> CaseHistory { get; }
 
-        public string CaseName { get; }
+        public string CaseName { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
 
         public Trial Trial { get; }
 
@@ -62,7 +62,7 @@ namespace Abogado.Domain.Entities
 
         public void AddLawyer(User user)
         {
-            if(Users is null)
+            if (Users is null)
                 this.Users = new List<UserCase>();
 
             if (Users.Count >= 2)
@@ -86,6 +86,12 @@ namespace Abogado.Domain.Entities
                 throw new Exception("solo puede tener un cliente o aux");
 
             Users.Add(UserCase.Build(user, this));
+        }
+
+        public void ChangeAtributtes(string caseName, string description)
+        {
+            CaseName = Guard.Against.NullOrEmpty(caseName, nameof(caseName));
+            Description = Guard.Against.NullOrEmpty(description);
         }
     }
 
