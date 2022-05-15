@@ -15,5 +15,7 @@ namespace Abogado.Infrastructure.Mappings
         //Mapear de Meeting a GetMeetingByIdDTO
         //Mapear de User a GetAllMeetingsByUserDTO
         //Mapear de Meeting a GetAllMeetingsByUserDTO.MeetingDTO
+        //Mapear de Case a GetByCaseIdDTO
+        //Mapear de User a GetByCaseIdDTO.UserCaseDTO
     }
 }

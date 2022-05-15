@@ -14,9 +14,9 @@ namespace Abogado.Domain.Entities
 
         public List<Case> CaseHistory { get; }
 
-        public string CaseName { get; set; }
+        public string CaseName { get; private set; }
 
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
         public Trial Trial { get; }
 
