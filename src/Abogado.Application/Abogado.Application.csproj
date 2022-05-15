@@ -25,7 +25,6 @@
     <Folder Include="UsersServices\GetUserId\" />
     <Folder Include="UsersServices\GetAllUserByName\" />
     <Folder Include="UsersServices\ModifyUser\" />
-    <Folder Include="UsersServices\Register\" />
   </ItemGroup>
 
 </Project>
