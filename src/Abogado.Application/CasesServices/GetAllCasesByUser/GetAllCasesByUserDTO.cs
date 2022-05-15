@@ -9,6 +9,8 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
 {
     public class GetAllCasesByUserDTO
     {
+        public string Id { get; set; }
+
         public List<CaseDTO> Cases { get; }
 
         public Role Role { get; }
@@ -21,6 +23,8 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
 
         public class CaseDTO
         {
+            public string Id { get; set; }
+
             public string CaseName { get; private set; }
 
             public string Description { get; private set; }

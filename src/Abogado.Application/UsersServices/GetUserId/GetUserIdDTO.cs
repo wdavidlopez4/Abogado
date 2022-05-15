@@ -9,6 +9,9 @@ namespace Abogado.Application.UsersServices.GetUserId
 {
     public class GetUserIdDTO
     {
+
+        public string Id { get; set; }
+
         public Role Role { get; set; }
 
         public string Name { get; set; }
@@ -20,14 +23,18 @@ namespace Abogado.Application.UsersServices.GetUserId
         public List<CaseDTO> Cases { get; set; }
 
         public List<MeetingDTO> Meetings { get; set; }
-        
+
         public class MeetingDTO
         {
+            public string Id { get; set; }
+
             public DateTime Date { get; set; }
         }
 
         public class CaseDTO
         {
+            public string Id { get; set; }
+
             public string CaseName { get; set; }
 
             public string Description { get; set; }

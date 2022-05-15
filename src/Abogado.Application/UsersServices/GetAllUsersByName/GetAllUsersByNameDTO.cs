@@ -10,6 +10,8 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
 {
     public class GetAllUsersByNameDTO 
     {
+        public string Id { get; set; }
+
         public Role Role { get; }
 
         public string Name { get; set; }
