@@ -22,7 +22,6 @@
     <Folder Include="CasesServices\GetAllCasesByUser\" />
     <Folder Include="MeetingServices\GetByMeetingId\" />
     <Folder Include="MeetingServices\GetAllMeetingByUser\" />
-    <Folder Include="UsersServices\GetAllUserByName\" />
   </ItemGroup>
 
 </Project>
