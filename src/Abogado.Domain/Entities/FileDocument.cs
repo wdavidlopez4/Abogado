@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Abogado.Domain.Entities
 {
-    public class File : Entity
+    public class FileDocument : Entity
     {
         public string FilePath { get; }
 
-        private File(string filePath)
+        private FileDocument(string filePath)
         {
             FilePath = Guard.Against.NullOrEmpty(filePath, nameof(filePath));
         }
 
-        public static File Build(string filePath)
+        public static FileDocument Build(string filePath)
         {
-            return new File(filePath);
+            return new FileDocument(filePath);
         }
     }
 

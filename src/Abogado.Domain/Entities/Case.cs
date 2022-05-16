@@ -26,7 +26,7 @@ namespace Abogado.Domain.Entities
 
         public Guid FileId { get; }
 
-        public File File { get; }
+        public FileDocument File { get; }
 
         public DateTime StartDate { get; }
 
