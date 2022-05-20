@@ -12,6 +12,7 @@ using Abogado.Application.UsersServices.ModifyUser;
 using Abogado.Application.UsersServices.Register;
 using Abogado.Domain.Ports;
 using Abogado.Infrastructure.Mappings;
+using Abogado.Infrastructure.Persistences.BlobFile;
 using Abogado.Infrastructure.Persistences.EF;
 using Abogado.Infrastructure.Persistences.SQLServerRepository;
 using Abogado.Infrastructure.Securities;
@@ -50,6 +51,7 @@ namespace Abogado.Infrastructure.Startup
             services.AddScoped<IRepository, SQLRepository>();
             services.AddScoped<ISecurity, Security>();
             services.AddScoped<IMapObject, MapObject>();
+            services.AddScoped< IRepositoryDocumnet, RepositoryDocumnet >();
         }
 
         private static void ConfigureMediador(IServiceCollection services)

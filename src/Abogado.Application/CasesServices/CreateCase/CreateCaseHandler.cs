@@ -3,6 +3,7 @@ using Abogado.Domain.Entities;
 using Abogado.Domain.Ports;
 using Ardalis.GuardClauses;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Abogado.Application.CasesServices.CreateCase
 {
@@ -10,32 +11,41 @@ namespace Abogado.Application.CasesServices.CreateCase
     {
         private readonly IRepository repository;
 
-        public CreateCaseHandler(IRepository repository)
+        private readonly IRepositoryDocumnet repositoryDocumnet;
+
+        public CreateCaseHandler(IRepository repository, IRepositoryDocumnet repositoryDocumnet)
         {
             this.repository = repository;
+            this.repositoryDocumnet = repositoryDocumnet;
         }
 
         public async Task<int> Handle(CreateCaseCommand request, CancellationToken cancellationToken)
         {
             Case caseAux;
+            FileDocument document;
+            string ruta;
 
             //Verificar que la peticion no este nula
             Guard.Against.Null(request, nameof(request));
 
-            //Crear caso
+            //subimos, guardamos y creamos el archivo
+            ruta = await repositoryDocumnet.SubirArchivo(request.Archivo);
+            document = FileDocument.Build(filePath: ruta);
+            await repository.Save<FileDocument>(document);
+
+            //Crear caso y gurdamos
             caseAux = Case.Build(
                  caseName: request.CaseName,
                  description: request.Description,
                  trial: request.Trial,
                  divorceForm: request.DivorceForm,
                  divorceMechanism: request.DivorceMechanism,
-                 fileId: request.FileId,
+                 fileId: document.Id,
                  startDate: request.StartDate);
-
-            //Guardar entidad
             await repository.Save<Case>(caseAux);
-            await repository.Commit();
 
+            //comitiamos y retornamos
+            await repository.Commit();
             return 0;
         }
     }

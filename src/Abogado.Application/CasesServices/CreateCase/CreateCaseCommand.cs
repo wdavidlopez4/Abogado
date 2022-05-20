@@ -1,5 +1,6 @@
 ﻿using Abogado.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Abogado.Application.CasesServices.CreateCase
 
         public DivorceMechanism DivorceMechanism { get; set; }
 
-        public Guid FileId { get; set; }
+        public IFormFile Archivo { get; set; }
 
         public DateTime StartDate { get; set; }
     }
