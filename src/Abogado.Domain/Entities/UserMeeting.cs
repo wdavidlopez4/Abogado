@@ -8,13 +8,13 @@ namespace Abogado.Domain.Entities
 {
     public class UserMeeting : Entity
     {
-        public Guid UserId { get; }
+        public Guid UserId { get; private set; }
 
-        public User User { get; }
+        public User User { get; private set; }
 
-        public Guid MeetingId { get; }
+        public Guid MeetingId { get; private set; }
 
-        public Meeting Meeting { get; }
+        public Meeting Meeting { get; private set; }
 
         private UserMeeting()
         {

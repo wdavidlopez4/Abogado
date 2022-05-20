@@ -12,23 +12,23 @@ namespace Abogado.Domain.Entities
     {
         public List<UserCase> Users { get; private set; }
 
-        public List<Case> CaseHistory { get; }
+        public List<Case> CaseHistory { get; private set; }
 
         public string CaseName { get; private set; }
 
         public string Description { get; private set; }
 
-        public Trial Trial { get; }
+        public Trial Trial { get; private set; }
 
-        public DivorceForm DivorceForm { get; }
+        public DivorceForm DivorceForm { get; private set; }
 
-        public DivorceMechanism DivorceMechanism { get; }
+        public DivorceMechanism DivorceMechanism { get; private set; }
 
-        public Guid FileId { get; }
+        public Guid FileId { get; private set; }
 
-        public FileDocument File { get; }
+        public FileDocument File { get; private set; }
 
-        public DateTime StartDate { get; }
+        public DateTime StartDate { get; private set; }
 
         private Case()
         {

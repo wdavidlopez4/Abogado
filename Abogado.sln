@@ -7,13 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5CCE7ED6-C5F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{F3C7E92F-37AD-4F32-96F4-37F13B9DA5B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Domain", "src\Abogado.Domain\Abogado.Domain.csproj", "{4B8F1EDB-9057-4879-8DFD-3813D2540758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abogado.Domain", "src\Abogado.Domain\Abogado.Domain.csproj", "{4B8F1EDB-9057-4879-8DFD-3813D2540758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Application", "src\Abogado.Application\Abogado.Application.csproj", "{F6C528FB-1D9F-4372-9904-6D56C3B75CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abogado.Application", "src\Abogado.Application\Abogado.Application.csproj", "{F6C528FB-1D9F-4372-9904-6D56C3B75CBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Infrastructure", "src\Abogado.Infrastructure\Abogado.Infrastructure.csproj", "{07E98B29-C742-484D-B0C2-319FE958AB15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abogado.Infrastructure", "src\Abogado.Infrastructure\Abogado.Infrastructure.csproj", "{07E98B29-C742-484D-B0C2-319FE958AB15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Web", "app\Abogado.Web\Abogado.Web.csproj", "{19DB38C3-08D5-4305-900E-C0F77BDAECCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abogado.Web", "app\Abogado.Web\Abogado.Web.csproj", "{19DB38C3-08D5-4305-900E-C0F77BDAECCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

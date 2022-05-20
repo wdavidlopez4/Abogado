@@ -10,7 +10,12 @@ namespace Abogado.Domain.Entities
 {
     public class FileDocument : Entity
     {
-        public string FilePath { get; }
+        public string FilePath { get; private set; }
+
+        private FileDocument()
+        {
+
+        }
 
         private FileDocument(string filePath)
         {
