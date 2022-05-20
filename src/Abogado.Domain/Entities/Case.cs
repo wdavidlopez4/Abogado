@@ -88,10 +88,11 @@ namespace Abogado.Domain.Entities
             Users.Add(UserCase.Build(user, this));
         }
 
-        public void ChangeAtributtes(string caseName, string description)
+        public void ChangeAtributtes(string caseName, string description, Guid? fileId = null)
         {
             CaseName = Guard.Against.NullOrEmpty(caseName, nameof(caseName));
             Description = Guard.Against.NullOrEmpty(description);
+            FileId = fileId != null ? fileId.Value : this.FileId;
         }
     }
 

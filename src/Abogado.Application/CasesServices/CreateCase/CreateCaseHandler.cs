@@ -11,9 +11,9 @@ namespace Abogado.Application.CasesServices.CreateCase
     {
         private readonly IRepository repository;
 
-        private readonly IRepositoryDocumnet repositoryDocumnet;
+        private readonly IRepositoryDocument repositoryDocumnet;
 
-        public CreateCaseHandler(IRepository repository, IRepositoryDocumnet repositoryDocumnet)
+        public CreateCaseHandler(IRepository repository, IRepositoryDocument repositoryDocumnet)
         {
             this.repository = repository;
             this.repositoryDocumnet = repositoryDocumnet;

@@ -25,7 +25,7 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
         public async Task<List<GetAllCasesByUserDTO>> Handle(GetAllCasesByUserQuery request, CancellationToken cancellationToken)
         {
 
-            List<User> users = new();
+            List<Case> cases = new();
 
             //Verificar que la peticion no se encuentre nula
             Guard.Against.Null(request, nameof(request));
@@ -35,17 +35,18 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
                 throw new Exception("Los campos se encuentran vacios");
 
             //Obtener usuario 
-            if ((!string.IsNullOrEmpty(request.Id)) && repository.Exists<User>(x => x.Id.ToString() == request.Id))
+            if ((!string.IsNullOrEmpty(request.Id)) && repository.Exists<Case>(x => x.Id.ToString() == request.Id))
             {
-                users.Add(await repository.GetNested<User>(x => x.Id.ToString() == request.Id, nameof(User.Cases)));
+                cases.Add(await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.Users)));
             }
             else if (!string.IsNullOrEmpty(request.NameUser))
             {
-                users = await repository.GetAllNested<User>(x => x.Name.Contains(request.NameUser), nameof(User.Cases));
+                ///Falta comprobrar si asocia directamente el usuario
+                //cases = await repository.GetAllNested<Case>(x => x.Users.Any((x) => x.Name.Contains(request.NameUser)), nameof(Case.Users));
             }
 
             //Mapear y retornar entidad
-            return mapObject.Map<List<User>, List<GetAllCasesByUserDTO>>(users);
+            return mapObject.Map<List<Case>, List<GetAllCasesByUserDTO>>(cases);
         }
     }
 }

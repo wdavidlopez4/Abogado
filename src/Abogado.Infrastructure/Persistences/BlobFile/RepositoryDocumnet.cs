@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Abogado.Infrastructure.Persistences.BlobFile
 {
-    public class RepositoryDocumnet : IRepositoryDocumnet
+    public class RepositoryDocumnet : IRepositoryDocument
     {
         public async Task<string> SubirArchivo(IFormFile archivo)
         {
@@ -26,6 +26,11 @@ namespace Abogado.Infrastructure.Persistences.BlobFile
         public FileStream AbrirArchivo(string rutaArchivo)
         {
             return new FileStream(rutaArchivo, FileMode.Open);
+        }
+
+        public void EliminarArchivo(string ruta)
+        {
+            File.Delete(ruta);
         }
 
     }

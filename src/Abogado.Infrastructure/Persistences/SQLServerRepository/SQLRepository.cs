@@ -26,6 +26,12 @@ namespace Abogado.Infrastructure.Persistences.SQLServerRepository
             await context.SaveChangesAsync();
         }
 
+        public async Task Delete<T>(T obj) where T : Entity
+        {
+            await Task.FromResult(
+               this.context.Remove(obj));
+        }
+
         public bool Exists<T>(Expression<Func<T, bool>> expression) where T : Entity
         {
             return context.Set<T>().Any(expression);

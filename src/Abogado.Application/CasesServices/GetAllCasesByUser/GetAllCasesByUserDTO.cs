@@ -11,33 +11,36 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
     {
         public string Id { get; set; }
 
-        public List<CaseDTO> Cases { get; }
+        public List<UserDTO> Users { get; private set; }
 
-        public Role Role { get; }
+        public string CaseName { get; private set; }
 
-        public string Name { get; set; }
+        public string Description { get; private set; }
 
-        public string Lastname { get; set; }
+        public Trial Trial { get; private set; }
 
-        public string Email { get; set; }
+        public DivorceForm DivorceForm { get; private set; }
 
-        public class CaseDTO
+        public DivorceMechanism DivorceMechanism { get; private set; }
+
+        public string FileId { get; private set; }
+
+        public DateTime StartDate { get; private set; }
+
+        public class UserDTO
         {
+
             public string Id { get; set; }
 
-            public string CaseName { get; private set; }
+            public Role Role { get; }
 
-            public string Description { get; private set; }
+            public string Name { get; set; }
 
-            public Trial Trial { get; }
+            public string Lastname { get; set; }
 
-            public DivorceForm DivorceForm { get; }
+            public string Email { get; set; }
 
-            public DivorceMechanism DivorceMechanism { get; }
-
-            public Guid FileId { get; }
-
-            public DateTime StartDate { get; }
+            public string EncriptPassword { get; }
         }
     }
 }

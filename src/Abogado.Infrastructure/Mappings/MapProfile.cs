@@ -28,7 +28,7 @@ namespace Abogado.Infrastructure.Mappings
             this.CreateMap <Case, GetByCaseIdDTO> ();
             this.CreateMap <User, GetByCaseIdDTO.UserCaseDTO> ();
             this.CreateMap <User, GetAllCasesByUserDTO> ();
-            this.CreateMap <Case, GetAllCasesByUserDTO.CaseDTO> ();
+            this.CreateMap <Case, GetAllCasesByUserDTO.UserDTO> ();
         }
     }
 }

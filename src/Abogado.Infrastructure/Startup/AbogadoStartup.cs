@@ -51,7 +51,7 @@ namespace Abogado.Infrastructure.Startup
             services.AddScoped<IRepository, SQLRepository>();
             services.AddScoped<ISecurity, Security>();
             services.AddScoped<IMapObject, MapObject>();
-            services.AddScoped< IRepositoryDocumnet, RepositoryDocumnet >();
+            services.AddScoped< IRepositoryDocument, RepositoryDocumnet >();
         }
 
         private static void ConfigureMediador(IServiceCollection services)
