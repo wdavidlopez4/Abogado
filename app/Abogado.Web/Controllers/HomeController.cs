@@ -20,6 +20,7 @@ namespace Abogado.Web.Controllers
             this.mediator = mediator;
         }
 
+        [Authorize(Roles = "abogado")]
         public IActionResult Index()
         {
             return View();

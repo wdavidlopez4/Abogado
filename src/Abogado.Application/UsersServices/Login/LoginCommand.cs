@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Abogado.Application.UsersServices.Login
 {
-    public class LoginCommand: IRequest<int>
+    public class LoginCommand: IRequest<LoginDTO>
     {
         public string Mail { get; set; }
 

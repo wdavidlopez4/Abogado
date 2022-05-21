@@ -10,20 +10,23 @@ using System.Threading.Tasks;
 
 namespace Abogado.Application.UsersServices.Login
 {
-    public class LoginHandler : IRequestHandler<LoginCommand, int>
+    public class LoginHandler : IRequestHandler<LoginCommand, LoginDTO>
     {
 
-        private IRepository repository;
+        private readonly IRepository repository;
 
-        private ISecurity security;
+        private readonly ISecurity security;
 
-        public LoginHandler(IRepository repository, ISecurity security)
+        private readonly IMapObject mapObject;
+
+        public LoginHandler(IRepository repository, ISecurity security, IMapObject mapObject)
         {
             this.repository = repository;
             this.security = security;
+            this.mapObject = mapObject;
         }
 
-        public async Task<int> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<LoginDTO> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             User user;
 
@@ -31,18 +34,18 @@ namespace Abogado.Application.UsersServices.Login
             Guard.Against.Null(request, nameof(request));
 
             //Comprobar si el usuario existe
-            if (repository.Exists<User>(x => x.Email == request.Mail))
+            if (repository.Exists<User>(x => x.Email == request.Mail) == false)
                 throw new Exception("El Usuario no se encuentra registrado, compruebe el correo");
 
             //Obtener el usuario
             user = await repository.Get<User>(x => x.Email == request.Mail);
 
             //Verificar la contraseña
-            if (user.EncriptPassword != this.security.EncryptPassword(request.Password))
-                throw new Exception("La contraseña es incorrecta");
+            //if (user.EncriptPassword != this.security.EncryptPassword(request.Password))
+              //  throw new Exception("La contraseña es incorrecta");
 
-            return 0;
+            //Mapear y retornar
+            return mapObject.Map<User, LoginDTO>(user);
         }
-
     }
 }

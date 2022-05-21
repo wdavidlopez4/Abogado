@@ -4,7 +4,7 @@
 @{
 }
 
-<section class="vh-100" style="background-color: #9A616D;">
+<section class="vh-100" style="background-color: #dcdcdc;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
@@ -20,12 +20,12 @@
                                 @using (Html.BeginForm("Login", "Login"))
                                 {
                                     <form>
-                                        <div class="d-flex align-items-center mb-3 pb-1">
-                                            <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                            <span class="h1 fw-bold mb-0">Logo</span>
+                                        <div class="d-flex align-items-center mb-3 pb-0">
+                                            <i class="fas fa-cubes" style="color: #ff6219;"></i>
+                                            <span class="h1 fw-bold">ABOGADO</span>
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicia Sesion con tu Cuenta</h5>
 
                                         <div class="form-outline mb-4">
                                             <input type="email" id="form2Example17" class="form-control form-control-lg" name="email" placeholder="Email" />
@@ -35,8 +35,8 @@
                                             <input type="password" id="form2Example27" class="form-control form-control-lg" name="password" placeholder="Contraseña" />
                                         </div>
 
-                                        <div class="pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                                        <div class="pt-1 mb-4 d-grid gap-2">
+                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                         </div>
                                     </form>
                                 }

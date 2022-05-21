@@ -18,7 +18,7 @@ namespace Abogado.Infrastructure.Persistences.SQLServerRepository
 
         public SQLRepository(AbogadoDbContext context)
         {
-            context = context ?? throw new ArgumentNullException(nameof(context));
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task Commit()

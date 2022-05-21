@@ -80,7 +80,7 @@ namespace Abogado.Infrastructure.Startup
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
-        //Configura Autenticacion
+        //Configura Autenticacion por cookies
         private static void ConfigureAutentication(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
