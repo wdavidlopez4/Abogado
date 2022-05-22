@@ -14,15 +14,15 @@ namespace Abogado.Domain.Entities
 
         public List<UserMeeting> Meetings { get; private set; }
 
-        public Role Role { get; }
+        public Role Role { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public string Lastname { get; set; }
+        public string Lastname { get; private set; }
 
-        public string Email { get; set; }
+        public string Email { get; private set; }
 
-        public string EncriptPassword { get; }
+        public string EncriptPassword { get; private set; }
 
         private User()
         {

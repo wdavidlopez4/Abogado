@@ -17,6 +17,7 @@ using Abogado.Infrastructure.Persistences.EF;
 using Abogado.Infrastructure.Persistences.SQLServerRepository;
 using Abogado.Infrastructure.Securities;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,7 @@ namespace Abogado.Infrastructure.Startup
             ConfigureIOC(services);
             ConfigureMediador(services);
             ConfigureMapper(services);
+            ConfigureAutentication(services);
         }
 
         private static void ConfigureContext(IServiceCollection services, IConfiguration configuration)
@@ -51,7 +53,7 @@ namespace Abogado.Infrastructure.Startup
             services.AddScoped<IRepository, SQLRepository>();
             services.AddScoped<ISecurity, Security>();
             services.AddScoped<IMapObject, MapObject>();
-            services.AddScoped< IRepositoryDocument, RepositoryDocumnet >();
+            services.AddScoped<IRepositoryDocument, RepositoryDocumnet>();
         }
 
         private static void ConfigureMediador(IServiceCollection services)
@@ -76,6 +78,18 @@ namespace Abogado.Infrastructure.Startup
         {
             //mapeo de entidades
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        }
+
+        //Configura Autenticacion por cookies
+        private static void ConfigureAutentication(IServiceCollection services)
+        {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login/Index";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.AccessDeniedPath = "/Login/Index";
+                });
         }
     }
 }

@@ -31,6 +31,50 @@ namespace Abogado.Infrastructure.Persistences.EF
         {
             //nombre de esquema
             modelBuilder.HasDefaultSchema("ABOGADO");
+
+            modelBuilder.Entity<Case>()
+                .Property(p => p.Id)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<Case>()
+                .Property(p => p.FileId)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<User>()
+                .Property(p => p.Id)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<FileDocument>()
+                .Property(p => p.Id)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<Meeting>()
+                .Property(p => p.Id)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<UserCase>()
+                .Property(p => p.Id)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<UserCase>()
+                .Property(p => p.UserId)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<UserCase>()
+               .Property(p => p.CaseId)
+               .HasColumnType("varchar");
+
+            modelBuilder.Entity<UserMeeting>()
+               .Property(p => p.Id)
+               .HasColumnType("varchar");
+
+            modelBuilder.Entity<UserMeeting>()
+                .Property(p => p.MeetingId)
+                .HasColumnType("varchar");
+
+            modelBuilder.Entity<UserMeeting>()
+               .Property(p => p.UserId)
+               .HasColumnType("varchar");
         }
     }
 }

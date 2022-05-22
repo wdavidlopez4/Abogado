@@ -1,18 +1,26 @@
 ﻿using Abogado.Web.Models;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Abogado.Web.Controllers
 {
+
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMediator mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _logger = logger;
+            this.mediator = mediator;
         }
 
+        [Authorize(Roles = "abogado")]
         public IActionResult Index()
         {
             return View();
