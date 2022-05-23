@@ -86,9 +86,9 @@ namespace Abogado.Infrastructure.Startup
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/Login/Index";
+                    options.LoginPath = "/Users/Login";
                     options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-                    options.AccessDeniedPath = "/Login/Index";
+                    options.AccessDeniedPath = "/Users/Login";
                 });
         }
     }

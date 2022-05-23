@@ -2,22 +2,28 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Abogado.Web.Controllers
 {
-    public class LoginController : Controller
+    public class UsersController : Controller
     {
-
         private readonly IMediator mediator;
 
-        public LoginController(IMediator mediator)
+        public UsersController(IMediator mediator)
         {
             this.mediator = mediator;
         }
 
+        [Authorize]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
         {
             return View();
         }
