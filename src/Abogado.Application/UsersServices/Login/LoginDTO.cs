@@ -11,7 +11,7 @@ namespace Abogado.Application.UsersServices.Login
     {
         public string Id { get; set; } 
 
-        public Role Role { get; }
+        public Role Role { get; set; }
 
         public string Name { get; set; }
 

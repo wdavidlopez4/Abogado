@@ -25,12 +25,14 @@ namespace Abogado.Web.Controllers
 
         public IActionResult Login()
         {
+            ViewData["Excepcion"] = TempData["Excepcion"];
             return View();
         }
 
         [HttpPost]
         public async Task<ActionResult> Login(string email, string password)
         {
+            LoginDTO dto = new();
 
             List<Claim> claims;
 
@@ -40,14 +42,21 @@ namespace Abogado.Web.Controllers
                 Password = password,
             };
 
-            LoginDTO dto = mediator.Send(command).Result;
+            try
+            {
+                dto = mediator.Send(command).Result;
+                claims = CreateClaims(dto);
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            claims = CreateClaims(dto);
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
+            }
+            catch (Exception e)
+            {
+                TempData["Excepcion"] = e.Message;
+            }
             return RedirectToAction("Index", "Home");
+
         }
 
         public async Task<ActionResult> Logout()

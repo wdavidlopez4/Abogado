@@ -41,8 +41,8 @@ namespace Abogado.Application.UsersServices.Login
             user = await repository.Get<User>(x => x.Email == request.Mail);
 
             //Verificar la contraseña
-            //if (user.EncriptPassword != this.security.EncryptPassword(request.Password))
-              //  throw new Exception("La contraseña es incorrecta");
+            if (user.EncriptPassword != this.security.EncryptPassword(request.Password))
+                throw new Exception("La contraseña es incorrecta");
 
             //Mapear y retornar
             return mapObject.Map<User, LoginDTO>(user);
