@@ -1,0 +1,77 @@
+﻿
+@using (Html.BeginForm("RegisterCase", "Cases"))
+{
+    <form>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">Nombre</label>
+                    @if (Model == null)
+                    {
+                        <input type="text" id="form6Example1" name="CaseName" class="form-control" required />
+                    }
+                    else
+                    {
+                        <input type="text" id="form6Example1" name="CaseName" value="@Model.Name" class="form-control" required />
+                    }
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-sm-6">
+                <div class="form-outline">
+                    <label for="exampleDataList" class="form-label">Trial</label>
+                    <select class="form-select" name="Trial" required>
+                        <option value="0">Inicio del Divorcio</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-outline">
+                    <label for="exampleDataList" class="form-label">Forma del Divorcio</label>
+                    <select class="form-select" name="DivorceForm" required>
+                        <option value="0">Voluntario</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-sm-6">
+                <div class="form-outline">
+                    <label for="exampleDataList" class="form-label">Mecanismo Divorcio</label>
+                    <select class="form-select" name="DivorceMechanism" required>
+                        <option value="0">Disolucion Natural</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-outline mb-2">
+                    <label class="form-label" name="labelDate" for="Fecha">Fecha</label>
+                    <input type="datetime-local" name="StartDate" id="Fecha" class="form-control" required />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Descripción</label>
+                    @if (Model == null)
+                    {
+                        <textarea class="form-control" name="Description" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                    }
+                    else
+                    {
+                        <textarea class="form-control" name="Description" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                    }
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-6">
+                    <label for="exampleFormControlFile1">Archivo de Caso</label>
+                    <input type="file" name="Archivo" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary  mb-4 col-12 ">Crear</button>
+    </form>
+}

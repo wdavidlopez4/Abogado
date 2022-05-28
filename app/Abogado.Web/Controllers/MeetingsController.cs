@@ -6,11 +6,13 @@ using Abogado.Application.MeetingServices.ModifyMeeting;
 using Abogado.Domain.Ports;
 using Abogado.Web.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Abogado.Web.Controllers
 {
+    [Authorize]
     public class MeetingsController : Controller
     {
 
@@ -41,6 +43,7 @@ namespace Abogado.Web.Controllers
             return View("Index", listMeetingUserVM);
         }
 
+        
         public IActionResult Crear()
         {
             return View();
