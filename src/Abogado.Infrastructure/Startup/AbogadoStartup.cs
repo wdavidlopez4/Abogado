@@ -3,7 +3,8 @@ using Abogado.Application.CasesServices.GetAllCasesByUser;
 using Abogado.Application.CasesServices.GetByCaseId;
 using Abogado.Application.CasesServices.ModifyCase;
 using Abogado.Application.MeetingServices.CreateMeeting;
-using Abogado.Application.MeetingServices.GetAllMeetingsByUser;
+using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
+using Abogado.Application.MeetingServices.GetAllMeetingsByUserName;
 using Abogado.Application.MeetingServices.GetMeetingById;
 using Abogado.Application.MeetingServices.ModifyMeeting;
 using Abogado.Application.UsersServices.GetAllUsersByName;
@@ -64,13 +65,14 @@ namespace Abogado.Infrastructure.Startup
                 typeof(GetByCaseIdQuery).GetTypeInfo().Assembly,
                 typeof(ModifyCaseCommand).GetTypeInfo().Assembly,
                 typeof(CreateMeetingCommand).GetTypeInfo().Assembly,
-                typeof(GetAllMeetingsByUserQuery).GetTypeInfo().Assembly,
+                typeof(GetAllMeetingsByUserName).GetTypeInfo().Assembly,
                 typeof(GetMeetingByIdQuery).GetTypeInfo().Assembly,
                 typeof(ModifyMeetingCommand).GetTypeInfo().Assembly,
                 typeof(GetAllUsersByNameQuery).GetTypeInfo().Assembly,
                 typeof(GetUserIdQuery).GetTypeInfo().Assembly,
                 typeof(ModifyUserCommand).GetTypeInfo().Assembly,
-                typeof(RegisterCommand).GetTypeInfo().Assembly
+                typeof(RegisterCommand).GetTypeInfo().Assembly,
+                typeof(GetAllMeetingsByUserNameDTO).GetTypeInfo().Assembly
                 );
         }
 
