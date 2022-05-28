@@ -66,7 +66,16 @@ namespace Abogado.Web.Controllers
                 Role = user.Role,
             };
 
-            await mediator.Send(command);
+            try
+            {
+                await mediator.Send(command);
+            }
+            catch (Exception e)
+            {
+                ViewData["Excepcion"] = e.Message;
+                return View("Register", user);
+
+            }
 
             return RedirectToAction("Index", "Users");
         }
@@ -74,6 +83,7 @@ namespace Abogado.Web.Controllers
         [Authorize(Roles = "abogado")]
         public async Task<IActionResult> Edit(string Id)
         {
+            ViewData["Excepcion"] = TempData["Excepcion"];
             GetUserIdDTO dto;
             GetUserIdQuery query = new()
             {
@@ -96,8 +106,15 @@ namespace Abogado.Web.Controllers
                 Mail = user.Email,
             };
 
-            await mediator.Send(command);
-
+            try
+            {
+                await mediator.Send(command);
+            }
+            catch (Exception e)
+            {
+                TempData["Excepcion"] = e.Message;
+                return await Edit(command.UserId);
+            }
             return RedirectToAction("Index", "Users");
         }
 

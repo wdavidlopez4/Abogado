@@ -30,7 +30,7 @@ namespace Abogado.Application.UsersServices.Register
 
             //Verificar que el usuario no este registrado
             if (repository.Exists<User>(x => x.Email == request.Mail))
-                throw new Exception("El usuario ya existe");
+                throw new Exception("El correo ya existe");
 
             //Crear usuario
             user = User.Build(

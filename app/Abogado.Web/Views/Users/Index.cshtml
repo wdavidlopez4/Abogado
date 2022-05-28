@@ -11,7 +11,7 @@
     @using (Html.BeginForm("GetUsersByName", "Users"))
     {
         <div class="input-group">
-            <input type="search" class="form-control rounded" name="filterName" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <input type="search" class="form-control rounded" name="filterName" placeholder="Search" aria-label="Search" aria-describedby="search-addon" required />
             <button type="submit" class="btn btn-outline-primary">search</button>
         </div>
     }

@@ -1,6 +1,14 @@
 ﻿@using Abogado.Application.UsersServices.GetUserId
 @model GetUserIdDTO
 
+@if (TempData.ContainsKey("Excepcion"))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @ViewData["Excepcion"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 @using (Html.BeginForm("EditUser", "Users"))
 {
     <form>
@@ -9,14 +17,14 @@
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example1">Nombre</label>
-                    <input type="text" id="form6Example1" name="Name" value="@Model.Name" class="form-control" />
+                    <input type="text" id="form6Example1" name="Name" value="@Model.Name" class="form-control" required />
                     <input type="hidden" id="form6Example1" name="UserId" value="@Model.Id" class="form-control" />
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example2">Apellido</label>
-                    <input type="text" id="form6Example2" name="LastName" value="@Model.Lastname"  class="form-control" />
+                    <input type="text" id="form6Example2" name="LastName" value="@Model.Lastname"  class="form-control" required />
                 </div>
             </div>
         </div>
@@ -24,7 +32,7 @@
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example1">Correo</label>
-                    <input type="text" id="form6Example1" name="Email"  value="@Model.Email" class="form-control" />
+                    <input type="email" id="form6Example1" name="Email"  value="@Model.Email" class="form-control" required />
                 </div>
             </div>
         </div>
