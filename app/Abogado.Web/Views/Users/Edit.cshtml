@@ -1,0 +1,33 @@
+﻿@using Abogado.Application.UsersServices.GetUserId
+@model GetUserIdDTO
+
+@using (Html.BeginForm("EditUser", "Users"))
+{
+    <form>
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">Nombre</label>
+                    <input type="text" id="form6Example1" name="Name" value="@Model.Name" class="form-control" />
+                    <input type="hidden" id="form6Example1" name="UserId" value="@Model.Id" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Apellido</label>
+                    <input type="text" id="form6Example2" name="LastName" value="@Model.Lastname"  class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">Correo</label>
+                    <input type="text" id="form6Example1" name="Email"  value="@Model.Email" class="form-control" />
+                </div>
+            </div>
+        </div>
+         <button type="submit" class="btn btn-primary" >Editar</button>
+    </form>
+}

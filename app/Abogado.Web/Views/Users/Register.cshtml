@@ -1,0 +1,50 @@
+﻿@model RegisterUserVM
+@using (Html.BeginForm("RegisterUser", "Users"))
+{
+    <form>
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">Nombre</label>
+                    <input type="text" id="form6Example1" name="Name" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Apellido</label>
+                    <input type="text" id="form6Example2" name="LastName" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example1">Correo</label>
+                    <input type="text" id="form6Example1" name="Mail" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form6Example2">Contraseña</label>
+                    <input type="password" id="form6Example2" name="Password" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-sm-6">
+                <div class="form-outline">
+                    <label for="exampleDataList" class="form-label">Rol de Usuario</label>
+                    <datalist id="roles">
+                        <option value="0">Abogado</option>
+                        <option value="1">Auxiliar</option>
+                        <option value="2">Cliente</option>
+                    </datalist>
+                    <input class="form-control" list="roles" name="Role" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary  mb-4 col-12 ">Crear</button>
+    </form>
+}
