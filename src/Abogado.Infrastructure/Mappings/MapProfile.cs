@@ -1,6 +1,7 @@
 ﻿using Abogado.Application.CasesServices.GetAllCasesByUser;
 using Abogado.Application.CasesServices.GetByCaseId;
-using Abogado.Application.MeetingServices.GetAllMeetingsByUser;
+using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
+using Abogado.Application.MeetingServices.GetAllMeetingsByUserName;
 using Abogado.Application.MeetingServices.GetMeetingById;
 using Abogado.Application.UsersServices.GetAllUsersByName;
 using Abogado.Application.UsersServices.GetUserId;
@@ -21,16 +22,21 @@ namespace Abogado.Infrastructure.Mappings
         {
             this.CreateMap<User, GetUserIdDTO>();
             this.CreateMap<Case, GetUserIdDTO.CaseDTO>();
-            this.CreateMap <Meeting, GetUserIdDTO.MeetingDTO> ();
-            this.CreateMap <User, GetAllUsersByNameDTO> ();
-            this.CreateMap <Meeting, GetMeetingByIdDTO> ();
-            this.CreateMap <User, GetAllMeetingsByUserDTO> ();
-            this.CreateMap <Meeting, GetAllMeetingsByUserDTO.MeetingDTO> ();
-            this.CreateMap <Case, GetByCaseIdDTO> ();
-            this.CreateMap <User, GetByCaseIdDTO.UserCaseDTO> ();
-            this.CreateMap <User, GetAllCasesByUserDTO> ();
-            this.CreateMap <Case, GetAllCasesByUserDTO.UserDTO> ();
+            this.CreateMap<Meeting, GetUserIdDTO.MeetingDTO>();
+            this.CreateMap<User, GetAllUsersByNameDTO>();
+            this.CreateMap<Meeting, GetMeetingByIdDTO>();
+            this.CreateMap<User, GetAllMeetingsByUserIdDTO>();
+            this.CreateMap<UserMeeting, GetAllMeetingsByUserIdDTO>();
+            this.CreateMap<User, GetAllMeetingsByUserIdDTO.UserDTO>();
+            this.CreateMap<Meeting, GetAllMeetingsByUserIdDTO.MeetingDTO>();
+            this.CreateMap<Case, GetByCaseIdDTO>();
+            this.CreateMap<User, GetByCaseIdDTO.UserCaseDTO>();
+            this.CreateMap<User, GetAllCasesByUserDTO>();
+            this.CreateMap<Case, GetAllCasesByUserDTO.UserDTO>();
             this.CreateMap<User, LoginDTO>();
+            this.CreateMap<UserMeeting, GetAllMeetingsByUserNameDTO>();
+            this.CreateMap<User, GetAllMeetingsByUserNameDTO.UserDTO>();
+            this.CreateMap<Meeting, GetAllMeetingsByUserNameDTO.MeetingDTO>();
         }
     }
 }

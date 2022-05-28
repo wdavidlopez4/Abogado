@@ -65,6 +65,7 @@ namespace Abogado.Web.Controllers
             return RedirectToAction("Index", "Login");
         }
 
+
         /// <summary>
         /// Metodo para crear claims
         /// </summary>

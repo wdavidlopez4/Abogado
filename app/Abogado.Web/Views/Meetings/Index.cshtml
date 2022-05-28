@@ -1,13 +1,23 @@
-﻿<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear Cita</button>
-<button class="btn btn-primary" onclick="location.href='@Url.Action("Get(@Url.Content(User.Identity.Name))" + @Url.Content(User.Identity.Name), "Meetings")'">Actualizar Tabla</button>
-<form action="/Users/Get(@User.Identity.Name)">wer</form>
-<button type="submit" action="/Users/Get(@User.Identity.Name)">Actualizar</button>
+﻿@using Abogado.Application.MeetingServices.GetAllMeetingsByUserId
+@using Abogado.Application.MeetingServices.GetMeetingById
+@model List<MeetingsUsersVM>
 
-<form asp-page-handle="Get" asp-route-id="@User.Identity.Name" method="Get">
-    <button class="btn btn-default">Actualizar</button>
-</form>
 
+
+<!-- Button modal -->
+<button class="btn btn-primary" onclick="location.href='@Url.Action("Crear", "Meetings")'">Crear Cita</button>
+
+<!--Barra de Busqueda-->
+@if (User.IsInRole("aux"))
+{
+    @using (Html.BeginForm("GetMeetingsByUserName", "Meetings"))
+    {
+        <div class="input-group">
+            <input type="search" class="form-control rounded" name="name" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-outline-primary">search</button>
+        </div>
+    }
+}
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,8 +48,38 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Fecha</th>
+            <th>Fecha Cita</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Meetings")'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+                    </svg>
+                </button>
+            </th>
         </tr>
     </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var modelAux in Model)
+                {
+                    <tr>
+                        <td>@modelAux.Meeting.Date</td>
+                        <td>@modelAux.User.Name</td>
+                        <td>@modelAux.User.Lastname</td>
+                        <td>@modelAux.User.Email</td>
+
+                        <td><a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Meeting.Id">Editar</a> <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Meeting.Id">Asignar</a> </td>
+
+                    </tr>
+                }
+            }
+        }
+    </tbody>
 </table>
 
