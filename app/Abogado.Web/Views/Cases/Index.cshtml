@@ -1,0 +1,41 @@
+﻿@using Abogado.Application.CasesServices.GetAllCasesByUser
+@model List<GetAllCasesByUserDTO>
+
+<button class="btn btn-primary" onclick="location.href='@Url.Action("Register", "Cases")'">Crear Caso</button>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre del Caso</th>
+            <th>Descripcion</th>
+            <th>Trial</th>
+            <th>Forma de Divorcio</th>
+            <th>Mecanica de Divorcio</th>
+            <th>Mecanica de Divorcio</th>
+            <th>Fecha Inicial</th>
+            <th>Cliente</th>
+            <th>Abogado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var modelAux in Model)
+                {
+                    <tr>
+                        <td>@modelAux.CaseName</td>
+                        <td>@modelAux.Description</td>
+                        <td>@modelAux.Trial.ToString()</td>
+                        <td>@modelAux.DivorceForm.ToString()</td>
+                        <td>@modelAux.DivorceMechanism.ToString()</td>
+                        <td>@modelAux.StartDate</td>
+
+                        <td><a class="btn btn-primary" href="~/Cases/EditCase/@modelAux.Id">Editar</a> </td>
+
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
