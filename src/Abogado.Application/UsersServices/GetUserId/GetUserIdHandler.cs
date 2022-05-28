@@ -33,7 +33,7 @@ namespace Abogado.Application.UsersServices.GetUserId
             if (repository.Exists<User>(x => x.Id.ToString() == request.Id) is false)
                 throw new Exception("El usuario no se encuentra registrado");
 
-            user = await repository.GetNested<User>(x => x.Id.ToString() == request.Id, nameof(User.Cases), nameof(User.Meetings));
+            user = await repository.Get<User>(x => x.Id.ToString() == request.Id);
 
             //Mapear objeto y retornar
             return MapObject.Map<User, GetUserIdDTO>(user);

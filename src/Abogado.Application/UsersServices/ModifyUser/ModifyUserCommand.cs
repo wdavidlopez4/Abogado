@@ -9,6 +9,8 @@ namespace Abogado.Application.UsersServices.ModifyUser
 {
     public class ModifyUserCommand : IRequest<int>
     {
+        public string UserId { get; set; }
+
         public string Name { get; set; }
 
         public string LastName  { get; set; }

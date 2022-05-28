@@ -1,4 +1,9 @@
-﻿using Abogado.Application.UsersServices.Login;
+﻿using Abogado.Application.UsersServices.GetAllUsersByName;
+using Abogado.Application.UsersServices.GetUserId;
+using Abogado.Application.UsersServices.Login;
+using Abogado.Application.UsersServices.ModifyUser;
+using Abogado.Application.UsersServices.Register;
+using Abogado.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -8,6 +13,7 @@ using System.Security.Claims;
 
 namespace Abogado.Web.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly IMediator mediator;
@@ -17,19 +23,86 @@ namespace Abogado.Web.Controllers
             this.mediator = mediator;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
+        public IActionResult GetUsersByName(string filterName)
+        {
+            List<GetAllUsersByNameDTO> dto;
+            GetAllUsersByNameQuery query = new()
+            {
+                FilterName = filterName,
+            };
+
+            dto = mediator.Send(query).Result;
+            return View("Index", dto);
+        }
+
+        [AllowAnonymous]
         public IActionResult Login()
         {
             ViewData["Excepcion"] = TempData["Excepcion"];
             return View();
         }
 
+        [Authorize(Roles = "abogado")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "abogado")]
+        public async Task<IActionResult> RegisterUser(RegisterUserVM user)
+        {
+
+            RegisterCommand command = new()
+            {
+                Name = user.Name,
+                LastName = user.LastName,
+                Mail = user.Mail,
+                EncriptPassword = user.Password,
+                Role = user.Role,
+            };
+
+            await mediator.Send(command);
+
+            return RedirectToAction("Index", "Users");
+        }
+
+        [Authorize(Roles = "abogado")]
+        public async Task<IActionResult> Edit(string Id)
+        {
+            GetUserIdDTO dto;
+            GetUserIdQuery query = new()
+            {
+                Id = Id,
+            };
+
+            dto = await mediator.Send(query);
+
+            return View("Edit", dto);
+        }
+
+        [Authorize(Roles = "abogado")]
+        public async Task<IActionResult> EditUser(EditUserVM user)
+        {
+            ModifyUserCommand command = new()
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                LastName = user.Lastname,
+                Mail = user.Email,
+            };
+
+            await mediator.Send(command);
+
+            return RedirectToAction("Index", "Users");
+        }
+
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Login(string email, string password)
         {
             LoginDTO dto = new();

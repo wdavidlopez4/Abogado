@@ -27,11 +27,14 @@ namespace Abogado.Application.UsersServices.ModifyUser
             //Verificar que la peticion no este nula
             Guard.Against.Null(request, nameof(request));
 
+            if (repository.Exists<User>(x => x.Email == request.Mail))
+                throw new Exception("El correo ya se encuentra registrado");
+
             //Verificar si el usuario existe, si existe obtenerlo
-            if (repository.Exists<User>(x => x.Email == request.Mail) is false)
+            if (repository.Exists<User>(x => x.Id.ToString() == request.UserId) is false)
                 throw new Exception("El Usuario no se encuentra registrado");
 
-            user = await repository.Get<User>(x => x.Email == request.Mail);
+            user = await repository.Get<User>(x => x.Id.ToString() == request.UserId);
 
             //Cambiar atributos del usuario
             user.ChangeAtributtes(request.Name, request.LastName, request.Mail);
