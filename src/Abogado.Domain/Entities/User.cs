@@ -10,9 +10,9 @@ namespace Abogado.Domain.Entities
 {
     public class User : Entity
     {
-        public List<UserCase> Cases { get; private set; }
+        public List<Case> Cases { get; private set; }
 
-        public List<UserMeeting> Meetings { get; private set; }
+        public List<Meeting> Meetings { get; private set; }
 
         public Role Role { get; private set; }
 

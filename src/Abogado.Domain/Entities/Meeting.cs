@@ -9,7 +9,7 @@ namespace Abogado.Domain.Entities
 {
     public class Meeting : Entity
     {
-        public List<UserMeeting> Users { get; private set; }
+        public List<User> Users { get; private set; }
 
         public DateTime Date { get; private set; }
 
@@ -31,29 +31,42 @@ namespace Abogado.Domain.Entities
         public void AddLawyer(User user)
         {
             if (Users is null)
-                this.Users = new List<UserMeeting>();
+                this.Users = new List<User>();
 
             if (Users.Count >= 2)
                 throw new Exception("solamnete puede tener dos objetos.");
 
-            else if (Users.Any(x => x.User.Role == Role.abogado))
+            else if (Users.Any(x => x.Role == Role.abogado))
                 throw new Exception("solo puede tener un abogado");
 
-            Users.Add(UserMeeting.Build(user, this));
+            Users.Add(user);
         }
 
+       /* public void AddUser(User user)
+        {
+            if (Users is null)
+                this.Users = new List<User>();
+
+            if (Users.Count >= 2)
+                throw new Exception("solamnete puede tener dos objetos.");
+
+            else if (Users.Any(x => x.Role == Role.cliente || x.Role == Role.aux))
+                throw new Exception("solo puede tener un cliente o aux");
+
+            Users.Add(user);
+        }
+*/
         public void AddUser(User user)
         {
             if (Users is null)
-                this.Users = new List<UserMeeting>();
+                this.Users = new List<User>();
 
             if (Users.Count >= 2)
-                throw new Exception("solamnete puede tener dos objetos.");
+                throw new Exception("solamente puede tener dos objetos.");
+            else if (Users.Any(x => x.Role == user.Role))
+                throw new Exception("La reunion solo puede tener asociado un abogado y un cliente");
 
-            else if (Users.Any(x => x.User.Role == Role.cliente || x.User.Role == Role.aux))
-                throw new Exception("solo puede tener un cliente o aux");
-
-            Users.Add(UserMeeting.Build(user, this));
+            Users.Add(user);
         }
 
         public void ChangeAttributes(DateTime date)

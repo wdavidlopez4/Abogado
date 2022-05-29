@@ -9,29 +9,23 @@ namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserId
 {
     public class GetAllMeetingsByUserIdDTO
     {
+        public string Id { get; set; }
 
-        public MeetingDTO Meeting { get; set; }
+        public List<UserDTO> Users { get; set; }
 
-        public UserDTO User { get; set; }
-
-        public class MeetingDTO
-        {
-
-            public string Id { get; set; }
-
-            public DateTime Date { get; set; }
-        }
+        public DateTime Date { get; set; }
 
         public class UserDTO
         {
-            public Role Role { get; private set; }
+            public string Id { get; set; }
 
-            public string Name { get; private set; }
+            public Role Role { get; set; }
 
-            public string Lastname { get; private set; }
+            public string Name { get; set; }
 
-            public string Email { get; private set; }
+            public string Lastname { get; set; }
+
+            public string Email { get; set; }
         }
-
     }
 }

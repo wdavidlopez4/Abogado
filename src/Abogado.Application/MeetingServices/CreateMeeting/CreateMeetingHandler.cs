@@ -1,4 +1,5 @@
 ﻿using Abogado.Domain.Entities;
+using Abogado.Domain.Enums;
 using Abogado.Domain.Ports;
 using Ardalis.GuardClauses;
 using MediatR;
@@ -22,6 +23,7 @@ namespace Abogado.Application.MeetingServices.CreateMeeting
 
         public async Task<int> Handle(CreateMeetingCommand request, CancellationToken cancellationToken)
         {
+            User user;
             Meeting meeting;
 
             //Verificar que la peticion no se encuentre nula
@@ -29,6 +31,10 @@ namespace Abogado.Application.MeetingServices.CreateMeeting
 
             //Crear la cita
             meeting = Meeting.Build(request.Date);
+
+            user = await repository.Get<User>(x => x.Id.ToString() == request.UserId);
+
+            meeting.AddUser(user);
 
             //Guardar la cita
             await this.repository.Save<Meeting>(meeting);

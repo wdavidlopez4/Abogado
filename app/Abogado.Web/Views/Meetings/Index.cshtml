@@ -1,7 +1,55 @@
 ﻿@using Abogado.Application.MeetingServices.GetAllMeetingsByUserId
 @using Abogado.Application.MeetingServices.GetMeetingById
+@using Abogado.Domain.Entities
+@using System.Security.Claims
 @model List<MeetingsUsersVM>
 
+@{
+    void RenderUsers(MeetingsUsersVM meetingsUsersVM)
+    {
+        var user = meetingsUsersVM.Users.Find(
+            x => x.Role.ToString() != User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value);
+
+        if (user != null)
+        {
+            <td>@user.Name</td>
+            <td>@user.Lastname</td>
+            <td>@user.Email</td>
+            <td>@user.Role</td>
+        }
+        else
+        {
+            <td>---</td>
+            <td>---</td>
+            <td>---</td>
+            <td>---</td>
+        }
+    }
+
+    void RenderHeaderTable()
+    {
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Rol</th>
+    }
+
+    void RenderEmptyColumns()
+    {
+        <td>----</td>
+        <td>----</td>
+        <td>----</td>
+        <td>----</td>
+    }
+}
+
+@if (TempData.ContainsKey("Excepcion"))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @ViewData["Excepcion"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 
 <button class="btn btn-primary" onclick="location.href='@Url.Action("Crear", "Meetings")'">Crear Cita</button>
 
@@ -17,47 +65,24 @@
     }
 }
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear Cita</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("Register", "Meetings"))
-                {
-                    <form asp-action="Register">
-                        <label for="date">Fecha</label>
-                        <input id="date" name="date" class="form-control" type="datetime-local" />
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Crear</button>
-                        </div>
-                    </form>
-                }
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Fecha Cita</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>
-                <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Meetings")'">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
-                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-                    </svg>
-                </button>
-            </th>
+            @if (User.IsInRole("abogado") || User.IsInRole("cliente"))
+            {
+                <th>Fecha Cita</th>
+                RenderHeaderTable();
+                <th></th>
+            }
+            else
+            {
+                <th>Fecha Cita</th>
+                RenderHeaderTable();
+                RenderHeaderTable();
+                <th>
+                </th>
+            }
+
         </tr>
     </thead>
     <tbody>
@@ -67,13 +92,56 @@
                 foreach (var modelAux in Model)
                 {
                     <tr>
-                        <td>@modelAux.Meeting.Date</td>
-                        <td>@modelAux.User.Name</td>
-                        <td>@modelAux.User.Lastname</td>
-                        <td>@modelAux.User.Email</td>
+                        <td>@modelAux.Date</td>
+                        @if (User.IsInRole("abogado"))
+                        {
+                            RenderUsers(modelAux);
+                            <td>
+                                @if (modelAux.Users.Count == 2)
+                                {
+                                    <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Id">Editar</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Id">Editar</a>
+                                    <a class="btn btn-primary" href="~/Meetings/AssignUserView/@modelAux.Id">Asignar</a>
+                                }
+                            </td>
+                        }
+                        else if (User.IsInRole("cliente"))
+                        {
+                            RenderUsers(modelAux);
+                            <td>
+                                <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Id">Editar</a>
+                            </td>
+                        }
+                        else if (User.IsInRole("aux"))
+                        {
+                            @foreach (var user in modelAux.Users)
+                            {
+                                <td>@user.Name</td>
+                                <td>@user.Lastname</td>
+                                <td>@user.Email</td>
+                                <td>@user.Role.ToString()</td>
+                            }
 
-                        <td><a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Meeting.Id">Editar</a> <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Meeting.Id">Asignar</a> </td>
+                            @if (modelAux.Users.Count < 2)
+                            {
+                                RenderEmptyColumns();
+                            }
 
+                            <td>
+                                @if (modelAux.Users.Count == 2)
+                                {
+                                    <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Id">Editar</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary" href="~/Meetings/Edit/@modelAux.Id">Editar</a>
+                                    <a class="btn btn-primary" href="~/Meetings/AssignUserView/@modelAux.Id">Asignar</a>
+                                }
+                            </td>
+                        }
                     </tr>
                 }
             }
