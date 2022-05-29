@@ -1,8 +1,10 @@
-﻿using Abogado.Application.MeetingServices.CreateMeeting;
+﻿using Abogado.Application.MeetingServices.AssignUser;
+using Abogado.Application.MeetingServices.CreateMeeting;
 using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
 using Abogado.Application.MeetingServices.GetAllMeetingsByUserName;
 using Abogado.Application.MeetingServices.GetMeetingById;
 using Abogado.Application.MeetingServices.ModifyMeeting;
+using Abogado.Application.UsersServices.GetAllUsersByName;
 using Abogado.Domain.Ports;
 using Abogado.Web.Models;
 using MediatR;
@@ -28,6 +30,7 @@ namespace Abogado.Web.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Excepcion"] = TempData["Excepcion"];
             var userIdAux = GetClaim("Id");
 
             List<GetAllMeetingsByUserIdDTO> dto;
@@ -43,7 +46,7 @@ namespace Abogado.Web.Controllers
             return View("Index", listMeetingUserVM);
         }
 
-        
+
         public IActionResult Crear()
         {
             return View();
@@ -54,16 +57,67 @@ namespace Abogado.Web.Controllers
             return View();
         }
 
-
-        [HttpPost]
-        public IActionResult Register(DateTime date)
+        public IActionResult RegisterMeetingByAux()
         {
-            CreateMeetingCommand command = new()
+            return View();
+        }
+
+        public IActionResult AssignUserView(string Id)
+        {
+            HttpContext.Session.SetString("MeetigId", Id);
+            TempData["Id"] = Id;
+            return View();
+        }
+
+        public async Task<IActionResult> AssignUser(string userId)
+        {
+            TempData["Id"] = TempData["Id"];
+            AssignUserCommand command = new()
             {
-                Date = date
+                //MeetingId = TempData["Id"].ToString(),
+                MeetingId = HttpContext.Session.GetString("MeetigId"),
+                UserId = userId,
             };
 
-            mediator.Send(command);
+            try
+            {
+                await mediator.Send(command);
+            }
+            catch (Exception e)
+            {
+                TempData["Excepcion"] = e.Message;
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult GetUsers(string filterName)
+        {
+            TempData["Id"] = TempData["Id"];
+
+            List<GetAllUsersByNameDTO> dto;
+            GetAllUsersByNameQuery query = new()
+            {
+                FilterName = filterName,
+            };
+
+            dto = mediator.Send(query).Result;
+            return View("AssignUserView", dto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterAsync(DateTime date)
+        {
+            string userId;
+            userId = GetClaim("Id");
+
+            CreateMeetingCommand command = new()
+            {
+                Date = date,
+                UserId = userId,
+            };
+
+            await mediator.Send(command);
 
             return RedirectToAction("Index", "Meetings");
         }
@@ -95,7 +149,7 @@ namespace Abogado.Web.Controllers
                 Date = date,
             };
 
-             await mediator.Send(command);
+            await mediator.Send(command);
 
             return RedirectToAction("Index", "Meetings");
         }
@@ -114,13 +168,6 @@ namespace Abogado.Web.Controllers
             listMeetingUserVM = mapObject.Map<List<GetAllMeetingsByUserNameDTO>, List<MeetingsUsersVM>>(dto);
 
             return View("Index", listMeetingUserVM);
-        }
-
-        public IActionResult AssignUser(string userId, string meetingId)
-        {
-
-
-            return View();
         }
 
     }

@@ -9,6 +9,8 @@ namespace Abogado.Application.MeetingServices.CreateMeeting
 {
     public class CreateMeetingCommand : IRequest<int>
     {
+        public string UserId { get; set; }
+
         public DateTime Date { get; set; }
 
     }

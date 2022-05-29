@@ -11,7 +11,6 @@ namespace Abogado.Application.MeetingServices.AssignUser
     {
         public string UserId { get; set; }
 
-        public string LawyerId { get; set; }
-
+        public string MeetingId { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Abogado.Application.MeetingServices.AssignUser
         {
 
             User user;
-            User lawyer;
+            Meeting meeting;
 
             //Verificar que la peticion no se encuentre nula
             Guard.Against.Null(request, nameof(request));
@@ -32,6 +32,16 @@ namespace Abogado.Application.MeetingServices.AssignUser
                 throw new Exception("El usuario no existe");
 
             user = await repository.Get<User>(x => x.Id.ToString() == request.UserId);
+
+            if (repository.Exists<Meeting>(x => x.Id.ToString() == request.MeetingId) is false)
+                throw new Exception("La reunion no existe");
+
+            meeting = await repository.GetNested<Meeting>(x => x.Id.ToString() == request.MeetingId, nameof(Meeting.Users));
+
+            meeting.AddUser(user);
+
+            await repository.Update<Meeting>(meeting);
+            await repository.Commit();
 
             return 0;
         }

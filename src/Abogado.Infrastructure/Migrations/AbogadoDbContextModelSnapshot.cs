@@ -124,50 +124,34 @@ namespace Abogado.Infrastructure.Migrations
                     b.ToTable("Users", "ABOGADO");
                 });
 
-            modelBuilder.Entity("Abogado.Domain.Entities.UserCase", b =>
+            modelBuilder.Entity("CaseUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("CasesId")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("CaseId")
-                        .IsRequired()
+                    b.Property<string>("UsersId")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)");
+                    b.HasKey("CasesId", "UsersId");
 
-                    b.HasKey("Id");
+                    b.HasIndex("UsersId");
 
-                    b.HasIndex("CaseId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserCases", "ABOGADO");
+                    b.ToTable("CaseUser", "ABOGADO");
                 });
 
-            modelBuilder.Entity("Abogado.Domain.Entities.UserMeeting", b =>
+            modelBuilder.Entity("MeetingUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("MeetingsId")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("MeetingId")
-                        .IsRequired()
+                    b.Property<string>("UsersId")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)");
+                    b.HasKey("MeetingsId", "UsersId");
 
-                    b.HasKey("Id");
+                    b.HasIndex("UsersId");
 
-                    b.HasIndex("MeetingId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserMeetings", "ABOGADO");
+                    b.ToTable("MeetingUser", "ABOGADO");
                 });
 
             modelBuilder.Entity("Abogado.Domain.Entities.Case", b =>
@@ -185,61 +169,39 @@ namespace Abogado.Infrastructure.Migrations
                     b.Navigation("File");
                 });
 
-            modelBuilder.Entity("Abogado.Domain.Entities.UserCase", b =>
+            modelBuilder.Entity("CaseUser", b =>
                 {
-                    b.HasOne("Abogado.Domain.Entities.Case", "Case")
-                        .WithMany("Users")
-                        .HasForeignKey("CaseId")
+                    b.HasOne("Abogado.Domain.Entities.Case", null)
+                        .WithMany()
+                        .HasForeignKey("CasesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Abogado.Domain.Entities.User", "User")
-                        .WithMany("Cases")
-                        .HasForeignKey("UserId")
+                    b.HasOne("Abogado.Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Case");
-
-                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Abogado.Domain.Entities.UserMeeting", b =>
+            modelBuilder.Entity("MeetingUser", b =>
                 {
-                    b.HasOne("Abogado.Domain.Entities.Meeting", "Meeting")
-                        .WithMany("Users")
-                        .HasForeignKey("MeetingId")
+                    b.HasOne("Abogado.Domain.Entities.Meeting", null)
+                        .WithMany()
+                        .HasForeignKey("MeetingsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Abogado.Domain.Entities.User", "User")
-                        .WithMany("Meetings")
-                        .HasForeignKey("UserId")
+                    b.HasOne("Abogado.Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Meeting");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Abogado.Domain.Entities.Case", b =>
                 {
                     b.Navigation("CaseHistory");
-
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("Abogado.Domain.Entities.Meeting", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("Abogado.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Cases");
-
-                    b.Navigation("Meetings");
                 });
 #pragma warning restore 612, 618
         }

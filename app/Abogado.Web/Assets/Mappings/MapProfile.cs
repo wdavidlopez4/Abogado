@@ -12,10 +12,10 @@ namespace Abogado.Web.Assets.Mappings
         {
             this.CreateMap<GetAllMeetingsByUserIdDTO, MeetingsUsersVM>();
             this.CreateMap<GetAllMeetingsByUserIdDTO.UserDTO, MeetingsUsersVM.UserDTO>();
-            this.CreateMap<GetAllMeetingsByUserIdDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
+           // this.CreateMap<GetAllMeetingsByUserIdDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
             this.CreateMap<GetAllMeetingsByUserNameDTO, MeetingsUsersVM>();
             this.CreateMap<GetAllMeetingsByUserNameDTO.UserDTO, MeetingsUsersVM.UserDTO>();
-            this.CreateMap<GetAllMeetingsByUserNameDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
+            //this.CreateMap<GetAllMeetingsByUserNameDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
         }
     }
 }

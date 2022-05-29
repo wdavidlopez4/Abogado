@@ -18,9 +18,6 @@ namespace Abogado.Infrastructure.Persistences.EF
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserCase> UserCases { get; set; }
-
-        public DbSet<UserMeeting> UserMeetings { get; set; }
 
         public AbogadoDbContext(DbContextOptions<AbogadoDbContext> options) : base(options)
         {
@@ -51,30 +48,6 @@ namespace Abogado.Infrastructure.Persistences.EF
             modelBuilder.Entity<Meeting>()
                 .Property(p => p.Id)
                 .HasColumnType("varchar");
-
-            modelBuilder.Entity<UserCase>()
-                .Property(p => p.Id)
-                .HasColumnType("varchar");
-
-            modelBuilder.Entity<UserCase>()
-                .Property(p => p.UserId)
-                .HasColumnType("varchar");
-
-            modelBuilder.Entity<UserCase>()
-               .Property(p => p.CaseId)
-               .HasColumnType("varchar");
-
-            modelBuilder.Entity<UserMeeting>()
-               .Property(p => p.Id)
-               .HasColumnType("varchar");
-
-            modelBuilder.Entity<UserMeeting>()
-                .Property(p => p.MeetingId)
-                .HasColumnType("varchar");
-
-            modelBuilder.Entity<UserMeeting>()
-               .Property(p => p.UserId)
-               .HasColumnType("varchar");
         }
     }
 }

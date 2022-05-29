@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Abogado.Infrastructure.Migrations
 {
-    public partial class migration_abogado : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,27 +89,26 @@ namespace Abogado.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserMeetings",
+                name: "MeetingUser",
                 schema: "ABOGADO",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", nullable: false),
-                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
-                    MeetingId = table.Column<string>(type: "varchar(36)", nullable: false)
+                    MeetingsId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    UsersId = table.Column<string>(type: "varchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserMeetings", x => x.Id);
+                    table.PrimaryKey("PK_MeetingUser", x => new { x.MeetingsId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_UserMeetings_Meetings_MeetingId",
-                        column: x => x.MeetingId,
+                        name: "FK_MeetingUser_Meetings_MeetingsId",
+                        column: x => x.MeetingsId,
                         principalSchema: "ABOGADO",
                         principalTable: "Meetings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserMeetings_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_MeetingUser_Users_UsersId",
+                        column: x => x.UsersId,
                         principalSchema: "ABOGADO",
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -117,27 +116,26 @@ namespace Abogado.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserCases",
+                name: "CaseUser",
                 schema: "ABOGADO",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", nullable: false),
-                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
-                    CaseId = table.Column<string>(type: "varchar(36)", nullable: false)
+                    CasesId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    UsersId = table.Column<string>(type: "varchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCases", x => x.Id);
+                    table.PrimaryKey("PK_CaseUser", x => new { x.CasesId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_UserCases_Cases_CaseId",
-                        column: x => x.CaseId,
+                        name: "FK_CaseUser_Cases_CasesId",
+                        column: x => x.CasesId,
                         principalSchema: "ABOGADO",
                         principalTable: "Cases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserCases_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_CaseUser_Users_UsersId",
+                        column: x => x.UsersId,
                         principalSchema: "ABOGADO",
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -157,38 +155,26 @@ namespace Abogado.Infrastructure.Migrations
                 column: "FileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCases_CaseId",
+                name: "IX_CaseUser_UsersId",
                 schema: "ABOGADO",
-                table: "UserCases",
-                column: "CaseId");
+                table: "CaseUser",
+                column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCases_UserId",
+                name: "IX_MeetingUser_UsersId",
                 schema: "ABOGADO",
-                table: "UserCases",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserMeetings_MeetingId",
-                schema: "ABOGADO",
-                table: "UserMeetings",
-                column: "MeetingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserMeetings_UserId",
-                schema: "ABOGADO",
-                table: "UserMeetings",
-                column: "UserId");
+                table: "MeetingUser",
+                column: "UsersId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserCases",
+                name: "CaseUser",
                 schema: "ABOGADO");
 
             migrationBuilder.DropTable(
-                name: "UserMeetings",
+                name: "MeetingUser",
                 schema: "ABOGADO");
 
             migrationBuilder.DropTable(

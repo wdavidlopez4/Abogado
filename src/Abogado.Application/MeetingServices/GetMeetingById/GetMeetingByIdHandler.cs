@@ -38,6 +38,5 @@ namespace Abogado.Application.MeetingServices.GetMeetingById
             //Mapear objeto y retornar
             return mapObject.Map<Meeting, GetMeetingByIdDTO>(meeting);
         }
-
     }
 }

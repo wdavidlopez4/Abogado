@@ -26,7 +26,7 @@ namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserName
 
         public async Task<List<GetAllMeetingsByUserNameDTO>> Handle(GetAllMeetingsByUserNameQuery request, CancellationToken cancellationToken)
         {
-            List<UserMeeting> meetingsUser = new();
+            List<Meeting> meetingsUser = new();
 
             //Verificar que la peticion no este nula
             Guard.Against.Null(request, nameof(request));
@@ -34,11 +34,11 @@ namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserName
             //Obtener usuario 
             if (!string.IsNullOrEmpty(request.Name))
             {
-                meetingsUser = await repository.GetAllNested<UserMeeting>(x => x.User.Name.Contains(request.Name), nameof(UserMeeting.User), nameof(UserMeeting.Meeting));
+                meetingsUser = await repository.GetAllNested<Meeting>(x => x.Users.Any(x => x.Name.Contains(request.Name)), nameof(Meeting.Users));
             }
 
             //Mapear objeto y retonar
-            return mapObject.Map<List<UserMeeting>, List<GetAllMeetingsByUserNameDTO>>(meetingsUser);
+            return mapObject.Map<List<Meeting>, List<GetAllMeetingsByUserNameDTO>>(meetingsUser);
         }
     }
 }

@@ -26,17 +26,17 @@ namespace Abogado.Infrastructure.Mappings
             this.CreateMap<User, GetAllUsersByNameDTO>();
             this.CreateMap<Meeting, GetMeetingByIdDTO>();
             this.CreateMap<User, GetAllMeetingsByUserIdDTO>();
-            this.CreateMap<UserMeeting, GetAllMeetingsByUserIdDTO>();
+           // this.CreateMap<UserMeeting, GetAllMeetingsByUserIdDTO>();
             this.CreateMap<User, GetAllMeetingsByUserIdDTO.UserDTO>();
-            this.CreateMap<Meeting, GetAllMeetingsByUserIdDTO.MeetingDTO>();
+            this.CreateMap<Meeting, GetAllMeetingsByUserIdDTO>();
             this.CreateMap<Case, GetByCaseIdDTO>();
             this.CreateMap<User, GetByCaseIdDTO.UserCaseDTO>();
             this.CreateMap<User, GetAllCasesByUserDTO>();
             this.CreateMap<Case, GetAllCasesByUserDTO.UserDTO>();
             this.CreateMap<User, LoginDTO>();
-            this.CreateMap<UserMeeting, GetAllMeetingsByUserNameDTO>();
+           // this.CreateMap<UserMeeting, GetAllMeetingsByUserNameDTO>();
             this.CreateMap<User, GetAllMeetingsByUserNameDTO.UserDTO>();
-            this.CreateMap<Meeting, GetAllMeetingsByUserNameDTO.MeetingDTO>();
+            this.CreateMap<Meeting, GetAllMeetingsByUserNameDTO>();
         }
     }
 }
