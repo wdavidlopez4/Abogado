@@ -3,7 +3,7 @@
 
 @if (User.IsInRole("abogado"))
 {
-    <button class="btn btn-primary" onclick="location.href='@Url.Action("Register", "Users")'">Crear Usuario</button>
+    <button class="btn btn-primary mb-2" onclick="location.href='@Url.Action("Register", "Users")'">Crear Usuario</button>
 }
 
 @if (User.IsInRole("abogado") || User.IsInRole("aux"))

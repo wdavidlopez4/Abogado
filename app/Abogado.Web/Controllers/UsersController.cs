@@ -179,7 +179,7 @@ namespace Abogado.Web.Controllers
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Login");
         }
 
 

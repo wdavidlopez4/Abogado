@@ -3,7 +3,8 @@
 
 @if (User.IsInRole("abogado"))
 {
-    <button class="btn btn-primary" onclick="location.href='@Url.Action("Register", "Cases")'">Crear Caso</button>
+    <button class="btn btn-primary mb-2" onclick="location.href='@Url.Action("Register", "Cases")'">Crear Caso</button>
+    
 }
 
 @if (User.IsInRole("abogado") || User.IsInRole("aux"))
@@ -62,8 +63,15 @@
                             }
                             @if (User.IsInRole("abogado"))
                             {
-                                <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
-                                <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
+                                @if (modelAux.Users.Count == 2)
+                                {
+                                    <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                }
+                                else
+                                {
+                                    <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                    <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
+                                }
                             }
                         </tr>
                     }
