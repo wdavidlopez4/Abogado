@@ -1,13 +1,8 @@
 ﻿using Abogado.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Abogado.Application.UsersServices.GetUserId
+namespace Abogado.Web.Models
 {
-    public class GetUserIdDTO
+    public class UsersVM
     {
         public string Id { get; set; }
 
@@ -47,5 +42,4 @@ namespace Abogado.Application.UsersServices.GetUserId
             public DateTime StartDate { get; set; }
         }
     }
-
 }

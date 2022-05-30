@@ -57,11 +57,13 @@ namespace Abogado.Infrastructure.Persistences.SQLServerRepository
         }
 
 
-        public async Task<List<Meeting>> GetAllNested<T>(Expression<Func<Meeting, bool>> expressionConditional, string nested)         {
-            return await context.Set<Meeting>()
-                   .Where(expressionConditional)
-                   .Include(x => x.Users)
-                   .ToListAsync();
+        public async Task<List<T>> GetAllNested<T>(Expression<Func<T, bool>> expressionConditional, string nested, string nestedTwo) where T : Entity
+        {
+            return await context.Set<T>()
+                    .Where(expressionConditional)
+                    .Include(nested)
+                    .Include(nestedTwo)
+                    .ToListAsync();
         }
 
         public async Task<T> GetNested<T>(Expression<Func<T, bool>> expression, string nested, string nestedSecond) where T : Entity

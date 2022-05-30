@@ -40,7 +40,6 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
 
             public string Email { get; set; }
 
-            public string EncriptPassword { get; }
         }
     }
 }

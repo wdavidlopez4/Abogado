@@ -3,6 +3,7 @@ using Abogado.Application.UsersServices.GetUserId;
 using Abogado.Application.UsersServices.Login;
 using Abogado.Application.UsersServices.ModifyUser;
 using Abogado.Application.UsersServices.Register;
+using Abogado.Domain.Ports;
 using Abogado.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -17,27 +18,53 @@ namespace Abogado.Web.Controllers
     public class UsersController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IMapObject mapObject;
 
-        public UsersController(IMediator mediator)
+        public UsersController(IMediator mediator, IMapObject mapObject)
         {
             this.mediator = mediator;
+            this.mapObject = mapObject;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (User.IsInRole("cliente"))
+            {
+                var Id = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value;
+                await GetUserById(Id);
+            }
             return View();
+
         }
 
         public IActionResult GetUsersByName(string filterName)
         {
             List<GetAllUsersByNameDTO> dto;
+            List<UsersVM> usersVM = new();
             GetAllUsersByNameQuery query = new()
             {
                 FilterName = filterName,
             };
 
             dto = mediator.Send(query).Result;
-            return View("Index", dto);
+            usersVM = mapObject.Map<List<GetAllUsersByNameDTO>, List<UsersVM>>(dto);
+            return View("Index", usersVM);
+        }
+
+        public async Task<IActionResult> GetUserById(string Id)
+        {
+            GetUserIdDTO dto;
+            List<UsersVM> listDTO = new();
+            GetUserIdQuery query = new()
+            {
+                Id = Id,
+            };
+
+            dto = await mediator.Send(query);
+
+            listDTO.Add(mapObject.Map<GetUserIdDTO, UsersVM>(dto));
+
+            return View("Index", listDTO);
         }
 
         [AllowAnonymous]

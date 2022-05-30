@@ -9,8 +9,7 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
 {
     public class GetAllCasesByUserQuery : IRequest<List<GetAllCasesByUserDTO>>
     {
-        public string Id { get; set; }
+        public string NameCase { get; set; }    
 
-        public string NameUser { get; set; }    
     }
 }
