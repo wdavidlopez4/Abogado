@@ -39,7 +39,7 @@ namespace Abogado.Application.CasesServices.ModifyCase
             caseAux = await repository.Get<Case>(x => x.Id.ToString() == request.Id);
 
             //Si hay un archivo
-            if (request.Archivo.Length > 0)
+            if (request.Archivo != null)
             {
                 //Crear nuevo archivo
                 newDocument = FileDocument.Build(await repositoryDocument.SubirArchivo(request.Archivo));

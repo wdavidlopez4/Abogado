@@ -29,7 +29,7 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
             Guard.Against.Null(request, nameof(request));
 
             //Obtener los usuario por nombre
-            users = await repository.GetAll<User>(x => x.Name.Contains(request.FilterName));
+            users = await repository.GetAllNested<User>(x => x.Name.Contains(request.FilterName), nameof(User.Meetings), nameof(User.Cases));
 
             //Mapear objeto y retornar
             return mapObject.Map<List<User>, List<GetAllUsersByNameDTO>>(users);

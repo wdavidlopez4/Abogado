@@ -1,5 +1,10 @@
-﻿using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
+﻿using Abogado.Application.CasesServices.GetAllCasesByUser;
+using Abogado.Application.CasesServices.GetByCaseId;
+using Abogado.Application.CasesServices.GetCaseByUserId;
+using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
 using Abogado.Application.MeetingServices.GetAllMeetingsByUserName;
+using Abogado.Application.UsersServices.GetAllUsersByName;
+using Abogado.Application.UsersServices.GetUserId;
 using Abogado.Domain.Entities;
 using Abogado.Web.Models;
 using AutoMapper;
@@ -12,9 +17,21 @@ namespace Abogado.Web.Assets.Mappings
         {
             this.CreateMap<GetAllMeetingsByUserIdDTO, MeetingsUsersVM>();
             this.CreateMap<GetAllMeetingsByUserIdDTO.UserDTO, MeetingsUsersVM.UserDTO>();
+            this.CreateMap<GetUserIdDTO, UsersVM>();
+            this.CreateMap<GetUserIdDTO.MeetingDTO, UsersVM.MeetingDTO>();
+            this.CreateMap<GetUserIdDTO.CaseDTO, UsersVM.CaseDTO>();
+            this.CreateMap<GetAllUsersByNameDTO, UsersVM>();
+            this.CreateMap<GetAllUsersByNameDTO.CaseDTO, UsersVM.CaseDTO>();
+            this.CreateMap<GetAllUsersByNameDTO.MeetingDTO, UsersVM.MeetingDTO>();
+            this.CreateMap<GetCaseByUserIdDTO, CaseVM>();
+            this.CreateMap<GetCaseByUserIdDTO.UserDTO, CaseVM.UserDTO>();
+            this.CreateMap<GetAllCasesByUserDTO, CaseVM>();
+            this.CreateMap<GetAllCasesByUserDTO.UserDTO, CaseVM.UserDTO>();
+
+
            // this.CreateMap<GetAllMeetingsByUserIdDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
-            this.CreateMap<GetAllMeetingsByUserNameDTO, MeetingsUsersVM>();
-            this.CreateMap<GetAllMeetingsByUserNameDTO.UserDTO, MeetingsUsersVM.UserDTO>();
+            this.CreateMap<GetCaseByUserDTO, MeetingsUsersVM>();
+            this.CreateMap<GetCaseByUserDTO.UserDTO, MeetingsUsersVM.UserDTO>();
             //this.CreateMap<GetAllMeetingsByUserNameDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
         }
     }

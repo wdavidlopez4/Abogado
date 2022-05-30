@@ -1,15 +1,8 @@
-﻿using Abogado.Domain.Entities;
-using Abogado.Domain.Enums;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Abogado.Domain.Enums;
 
-namespace Abogado.Application.UsersServices.GetAllUsersByName
+namespace Abogado.Web.Models
 {
-    public class GetAllUsersByNameDTO
+    public class UsersVM
     {
         public string Id { get; set; }
 
@@ -25,7 +18,6 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
 
         public List<MeetingDTO> Meetings { get; set; }
 
-
         public class MeetingDTO
         {
             public string Id { get; set; }
@@ -35,6 +27,8 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
 
         public class CaseDTO
         {
+            public string Id { get; set; }
+
             public string CaseName { get; set; }
 
             public string Description { get; set; }
@@ -45,14 +39,7 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
 
             public DivorceMechanism DivorceMechanism { get; set; }
 
-            public Guid FileId { get; set; }
-
-            public FileDocument File { get; set; }
-
             public DateTime StartDate { get; set; }
         }
     }
-
-
-   
 }

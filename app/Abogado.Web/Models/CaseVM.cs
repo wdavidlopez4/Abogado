@@ -1,13 +1,8 @@
 ﻿using Abogado.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Abogado.Application.CasesServices.GetByCaseId
+namespace Abogado.Web.Models
 {
-    public class GetByCaseIdDTO
+    public class CaseVM
     {
         public string Id { get; set; }
 
@@ -23,13 +18,22 @@ namespace Abogado.Application.CasesServices.GetByCaseId
 
         public DivorceMechanism DivorceMechanism { get; set; }
 
-        public Guid FileId { get; set; }
+        public string FileId { get; set; }
 
         public DateTime StartDate { get; set; }
 
         public class UserDTO
         {
+
             public string Id { get; set; }
+
+            public Role Role { get; set; }
+
+            public string Name { get; set; }
+
+            public string Lastname { get; set; }
+
+            public string Email { get; set; }
 
         }
     }

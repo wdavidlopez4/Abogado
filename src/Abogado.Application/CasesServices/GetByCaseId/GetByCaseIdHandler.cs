@@ -26,13 +26,13 @@ namespace Abogado.Application.CasesServices.GetByCaseId
             Case caseAux;
 
             //Verificar que la peticion no este nula
-            Guard.Against.Null(request,nameof(request));
+            Guard.Against.Null(request, nameof(request));
 
             //Verificar que el caso exista, si existe obtenerlo
             if (repository.Exists<Case>(x => x.Id.ToString() == request.Id) is false)
-                throw new Exception("El caso no se encuentra registrado");
+                throw new Exception("El usuario no se encuentra registrado");
 
-            caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.CaseHistory), nameof(Case.Users));
+            caseAux = await repository.Get<Case>(x => x.Id.ToString() == request.Id);
 
             //Mapear entidad y retornar
             return mapObject.Map<Case, GetByCaseIdDTO>(caseAux);

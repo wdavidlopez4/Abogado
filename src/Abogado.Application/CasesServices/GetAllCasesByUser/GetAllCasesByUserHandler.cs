@@ -30,20 +30,7 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
             //Verificar que la peticion no se encuentre nula
             Guard.Against.Null(request, nameof(request));
 
-            //Verificar que las 2 peticiones no esten vacias o nulas
-            if (string.IsNullOrEmpty(request.Id) && string.IsNullOrEmpty(request.NameUser))
-                throw new Exception("Los campos se encuentran vacios");
-
-            //Obtener usuario 
-            if ((!string.IsNullOrEmpty(request.Id)) && repository.Exists<Case>(x => x.Id.ToString() == request.Id))
-            {
-                cases.Add(await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.Users)));
-            }
-            else if (!string.IsNullOrEmpty(request.NameUser))
-            {
-                ///Falta comprobrar si asocia directamente el usuario
-                //cases = await repository.GetAllNested<Case>(x => x.Users.Any((x) => x.Name.Contains(request.NameUser)), nameof(Case.Users));
-            }
+            cases = await repository.GetAllNested<Case>(x => x.CaseName.Contains(request.NameCase), nameof(Case.Users));
 
             //Mapear y retornar entidad
             return mapObject.Map<List<Case>, List<GetAllCasesByUserDTO>>(cases);

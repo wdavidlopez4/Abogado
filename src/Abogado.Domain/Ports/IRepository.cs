@@ -28,6 +28,8 @@ namespace Abogado.Domain.Ports
 
         public Task<List<T>> GetAllNested<T>(Expression<Func<T, bool>> expressionConditional, string nested) where T : Entity;
 
+        public Task<List<T>> GetAllNested<T>(Expression<Func<T, bool>> expressionConditional, string nested, string nestedTwo) where T : Entity;
+
         public Task Delete<T>(T obj) where T : Entity;
     }
 }

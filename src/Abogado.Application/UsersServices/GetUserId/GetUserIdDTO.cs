@@ -9,7 +9,6 @@ namespace Abogado.Application.UsersServices.GetUserId
 {
     public class GetUserIdDTO
     {
-
         public string Id { get; set; }
 
         public Role Role { get; set; }

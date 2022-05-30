@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserName
 {
-    public class GetAllMeetingsByUserNameHandler : IRequestHandler<GetAllMeetingsByUserNameQuery, List<GetAllMeetingsByUserNameDTO>>
+    public class GetAllMeetingsByUserNameHandler : IRequestHandler<GetAllMeetingsByUserNameQuery, List<GetCaseByUserDTO>>
     {
 
         private readonly IRepository repository;
@@ -24,7 +24,7 @@ namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserName
             this.mapObject = mapObject;
         }
 
-        public async Task<List<GetAllMeetingsByUserNameDTO>> Handle(GetAllMeetingsByUserNameQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetCaseByUserDTO>> Handle(GetAllMeetingsByUserNameQuery request, CancellationToken cancellationToken)
         {
             List<Meeting> meetingsUser = new();
 
@@ -38,7 +38,7 @@ namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserName
             }
 
             //Mapear objeto y retonar
-            return mapObject.Map<List<Meeting>, List<GetAllMeetingsByUserNameDTO>>(meetingsUser);
+            return mapObject.Map<List<Meeting>, List<GetCaseByUserDTO>>(meetingsUser);
         }
     }
 }
