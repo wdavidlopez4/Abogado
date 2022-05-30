@@ -60,34 +60,6 @@ namespace Abogado.Domain.Entities
             CaseHistory.Add(caseHistory);
         }
 
-        /* public void AddLawyer(User user)
-         {
-             if (Users is null)
-                 this.Users = new List<UserCase>();
-
-             if (Users.Count >= 2)
-                 throw new Exception("solamnete puede tener dos objetos.");
-
-             else if (Users.Any(x => x.User.Role == Role.abogado))
-                 throw new Exception("solo puede tener un abogado");
-
-             Users.Add(UserCase.Build(user, this));
-         }
-
-         public void AddUser(User user)
-         {
-             if (Users is null)
-                 this.Users = new List<UserCase>();
-
-             if (Users.Count >= 2)
-                 throw new Exception("solamnete puede tener dos objetos.");
-
-             else if (Users.Any(x => x.User.Role == Role.cliente || x.User.Role == Role.aux))
-                 throw new Exception("solo puede tener un cliente o aux");
-
-             Users.Add(UserCase.Build(user, this));
-         }*/
-
         public void AddUser(User user)
         {
             if (Users is null)

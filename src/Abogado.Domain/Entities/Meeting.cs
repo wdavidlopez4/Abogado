@@ -28,34 +28,6 @@ namespace Abogado.Domain.Entities
             return new Meeting(date);
         }
 
-        public void AddLawyer(User user)
-        {
-            if (Users is null)
-                this.Users = new List<User>();
-
-            if (Users.Count >= 2)
-                throw new Exception("solamnete puede tener dos objetos.");
-
-            else if (Users.Any(x => x.Role == Role.abogado))
-                throw new Exception("solo puede tener un abogado");
-
-            Users.Add(user);
-        }
-
-       /* public void AddUser(User user)
-        {
-            if (Users is null)
-                this.Users = new List<User>();
-
-            if (Users.Count >= 2)
-                throw new Exception("solamnete puede tener dos objetos.");
-
-            else if (Users.Any(x => x.Role == Role.cliente || x.Role == Role.aux))
-                throw new Exception("solo puede tener un cliente o aux");
-
-            Users.Add(user);
-        }
-*/
         public void AddUser(User user)
         {
             if (Users is null)
