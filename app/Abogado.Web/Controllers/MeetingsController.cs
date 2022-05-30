@@ -156,7 +156,7 @@ namespace Abogado.Web.Controllers
 
         public async Task<IActionResult> GetMeetingsByUserName(string name)
         {
-            List<GetAllMeetingsByUserNameDTO> dto;
+            List<GetCaseByUserDTO> dto;
             List<MeetingsUsersVM> listMeetingUserVM;
             GetAllMeetingsByUserNameQuery query = new()
             {
@@ -165,7 +165,7 @@ namespace Abogado.Web.Controllers
 
             dto = await mediator.Send(query);
 
-            listMeetingUserVM = mapObject.Map<List<GetAllMeetingsByUserNameDTO>, List<MeetingsUsersVM>>(dto);
+            listMeetingUserVM = mapObject.Map<List<GetCaseByUserDTO>, List<MeetingsUsersVM>>(dto);
 
             return View("Index", listMeetingUserVM);
         }

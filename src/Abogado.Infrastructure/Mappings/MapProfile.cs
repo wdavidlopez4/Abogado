@@ -1,5 +1,6 @@
 ﻿using Abogado.Application.CasesServices.GetAllCasesByUser;
 using Abogado.Application.CasesServices.GetByCaseId;
+using Abogado.Application.CasesServices.GetCaseByUserId;
 using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
 using Abogado.Application.MeetingServices.GetAllMeetingsByUserName;
 using Abogado.Application.MeetingServices.GetMeetingById;
@@ -28,17 +29,22 @@ namespace Abogado.Infrastructure.Mappings
             this.CreateMap<Case, GetAllUsersByNameDTO.CaseDTO>();
             this.CreateMap<Meeting, GetMeetingByIdDTO>();
             this.CreateMap<User, GetAllMeetingsByUserIdDTO>();
-            // this.CreateMap<UserMeeting, GetAllMeetingsByUserIdDTO>();
             this.CreateMap<User, GetAllMeetingsByUserIdDTO.UserDTO>();
             this.CreateMap<Meeting, GetAllMeetingsByUserIdDTO>();
             this.CreateMap<Case, GetByCaseIdDTO>();
-            this.CreateMap<User, GetByCaseIdDTO.UserCaseDTO>();
-            this.CreateMap<User, GetAllCasesByUserDTO>();
-            this.CreateMap<Case, GetAllCasesByUserDTO.UserDTO>();
+            this.CreateMap<User, GetByCaseIdDTO.UserDTO>();
+            this.CreateMap<Case, GetAllCasesByUserDTO>();
+            this.CreateMap<User, GetAllCasesByUserDTO.UserDTO>();
             this.CreateMap<User, LoginDTO>();
-            // this.CreateMap<UserMeeting, GetAllMeetingsByUserNameDTO>();
-            this.CreateMap<User, GetAllMeetingsByUserNameDTO.UserDTO>();
-            this.CreateMap<Meeting, GetAllMeetingsByUserNameDTO>();
+            this.CreateMap<User, GetCaseByUserDTO.UserDTO>();
+            this.CreateMap<Meeting, GetCaseByUserDTO>();
+            this.CreateMap<Case, GetCaseByUserDTO>();
+            this.CreateMap<User, GetCaseByUserDTO.UserDTO>();
+            this.CreateMap<User, GetCaseByUserIdDTO.UserDTO>();
+            this.CreateMap<Case, GetCaseByUserIdDTO>();
+            
+
+
         }
     }
 }

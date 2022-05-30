@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Abogado.Application.MeetingServices.GetAllMeetingsByUserName
 {
-    public class GetAllMeetingsByUserNameDTO
+    public class GetCaseByUserDTO
     {
         public string Id { get; set; }
 

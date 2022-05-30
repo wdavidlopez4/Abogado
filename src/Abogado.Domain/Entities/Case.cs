@@ -60,33 +60,46 @@ namespace Abogado.Domain.Entities
             CaseHistory.Add(caseHistory);
         }
 
-       /* public void AddLawyer(User user)
-        {
-            if (Users is null)
-                this.Users = new List<UserCase>();
+        /* public void AddLawyer(User user)
+         {
+             if (Users is null)
+                 this.Users = new List<UserCase>();
 
-            if (Users.Count >= 2)
-                throw new Exception("solamnete puede tener dos objetos.");
+             if (Users.Count >= 2)
+                 throw new Exception("solamnete puede tener dos objetos.");
 
-            else if (Users.Any(x => x.User.Role == Role.abogado))
-                throw new Exception("solo puede tener un abogado");
+             else if (Users.Any(x => x.User.Role == Role.abogado))
+                 throw new Exception("solo puede tener un abogado");
 
-            Users.Add(UserCase.Build(user, this));
-        }
+             Users.Add(UserCase.Build(user, this));
+         }
+
+         public void AddUser(User user)
+         {
+             if (Users is null)
+                 this.Users = new List<UserCase>();
+
+             if (Users.Count >= 2)
+                 throw new Exception("solamnete puede tener dos objetos.");
+
+             else if (Users.Any(x => x.User.Role == Role.cliente || x.User.Role == Role.aux))
+                 throw new Exception("solo puede tener un cliente o aux");
+
+             Users.Add(UserCase.Build(user, this));
+         }*/
 
         public void AddUser(User user)
         {
             if (Users is null)
-                this.Users = new List<UserCase>();
+                this.Users = new List<User>();
 
             if (Users.Count >= 2)
-                throw new Exception("solamnete puede tener dos objetos.");
+                throw new Exception("solamente puede tener dos objetos.");
+            else if (Users.Any(x => x.Role == user.Role))
+                throw new Exception("La reunion solo puede tener asociado un abogado y un cliente");
 
-            else if (Users.Any(x => x.User.Role == Role.cliente || x.User.Role == Role.aux))
-                throw new Exception("solo puede tener un cliente o aux");
-
-            Users.Add(UserCase.Build(user, this));
-        }*/
+            Users.Add(user);
+        }
 
         public void ChangeAtributtes(string caseName, string description, Guid? fileId = null)
         {

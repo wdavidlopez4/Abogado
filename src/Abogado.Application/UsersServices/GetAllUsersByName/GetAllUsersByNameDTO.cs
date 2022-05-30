@@ -21,9 +21,9 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
 
         public string Email { get; set; }
 
-        public List<CaseDTO> Cases { get; private set; }
+        public List<CaseDTO> Cases { get; set; }
 
-        public List<MeetingDTO> Meetings { get; private set; }
+        public List<MeetingDTO> Meetings { get; set; }
 
 
         public class MeetingDTO
@@ -35,21 +35,21 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
 
         public class CaseDTO
         {
-            public string CaseName { get; private set; }
+            public string CaseName { get; set; }
 
-            public string Description { get; private set; }
+            public string Description { get; set; }
 
-            public Trial Trial { get; private set; }
+            public Trial Trial { get; set; }
 
-            public DivorceForm DivorceForm { get; private set; }
+            public DivorceForm DivorceForm { get; set; }
 
-            public DivorceMechanism DivorceMechanism { get; private set; }
+            public DivorceMechanism DivorceMechanism { get; set; }
 
-            public Guid FileId { get; private set; }
+            public Guid FileId { get; set; }
 
-            public FileDocument File { get; private set; }
+            public FileDocument File { get; set; }
 
-            public DateTime StartDate { get; private set; }
+            public DateTime StartDate { get; set; }
         }
     }
 

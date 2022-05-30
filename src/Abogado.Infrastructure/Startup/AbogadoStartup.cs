@@ -72,7 +72,7 @@ namespace Abogado.Infrastructure.Startup
                 typeof(GetUserIdQuery).GetTypeInfo().Assembly,
                 typeof(ModifyUserCommand).GetTypeInfo().Assembly,
                 typeof(RegisterCommand).GetTypeInfo().Assembly,
-                typeof(GetAllMeetingsByUserNameDTO).GetTypeInfo().Assembly
+                typeof(GetCaseByUserDTO).GetTypeInfo().Assembly
                 );
         }
 

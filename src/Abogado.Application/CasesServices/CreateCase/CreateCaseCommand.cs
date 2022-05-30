@@ -11,6 +11,8 @@ namespace Abogado.Application.CasesServices.CreateCase
 {
     public class CreateCaseCommand : IRequest<int>
     {
+        public string LawyerId { get; set; }
+
         public string CaseName { get; set; }
 
         public string Description { get; set; }

@@ -1,20 +1,37 @@
 ﻿@using Abogado.Application.CasesServices.GetAllCasesByUser
-@model List<GetAllCasesByUserDTO>
+@model List<CaseVM>
 
-<button class="btn btn-primary" onclick="location.href='@Url.Action("Register", "Cases")'">Crear Caso</button>
+@if (User.IsInRole("abogado"))
+{
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("Register", "Cases")'">Crear Caso</button>
+}
+
+@if (User.IsInRole("abogado") || User.IsInRole("aux"))
+{
+    @using (Html.BeginForm("GetCases", "Cases"))
+    {
+        <div class="input-group">
+            <input type="search" class="form-control rounded" name="filterName" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-outline-primary">search</button>
+        </div>
+    }
+}
+
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Nombre del Caso</th>
             <th>Descripcion</th>
-            <th>Trial</th>
-            <th>Forma de Divorcio</th>
-            <th>Mecanica de Divorcio</th>
-            <th>Mecanica de Divorcio</th>
             <th>Fecha Inicial</th>
-            <th>Cliente</th>
-            <th>Abogado</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,17 +40,33 @@
             {
                 foreach (var modelAux in Model)
                 {
-                    <tr>
-                        <td>@modelAux.CaseName</td>
-                        <td>@modelAux.Description</td>
-                        <td>@modelAux.Trial.ToString()</td>
-                        <td>@modelAux.DivorceForm.ToString()</td>
-                        <td>@modelAux.DivorceMechanism.ToString()</td>
-                        <td>@modelAux.StartDate</td>
+                    if (modelAux != null)
+                    {
 
-                        <td><a class="btn btn-primary" href="~/Cases/EditCase/@modelAux.Id">Editar</a> </td>
+                        <tr>
+                            <td>@modelAux.CaseName</td>
+                            <td>@modelAux.Description</td>
+                            <td>@modelAux.StartDate</td>
 
-                    </tr>
+                            @foreach (var item in modelAux.Users)
+                            {
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.Role</td>
+                            }
+                            @if (modelAux.Users.Count < 2)
+                            {
+                                <td>-------</td>
+                                <td>-------</td>
+                                <td>-------</td>
+                            }
+                            @if (User.IsInRole("abogado"))
+                            {
+                                <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
+                            }
+                        </tr>
+                    }
                 }
             }
         }

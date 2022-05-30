@@ -25,8 +25,6 @@
             <th>Email</th>
             <th>Role</th>
             <th>Reuniones</th>
-            <th>
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -45,7 +43,7 @@
                         }
                         else
                         {
-                            var countRows = modelAux.Meetings.Count+1;
+                            var countRows = modelAux.Meetings.Count + 1;
 
                             <td rowspan="@countRows">@modelAux.Name</td>
                             <td rowspan="@countRows">@modelAux.Lastname</td>
@@ -58,24 +56,22 @@
                             <td>-------</td>
                             @if (User.IsInRole("abogado"))
                             {
-                                <td><a class="btn btn-primary" href="~/Users/Edit/@modelAux.Id">Editar</a></td>
+                                <td><a class="btn btn-primary" href="~/Users/E dit/@modelAux.Id">Editar</a></td>
                             }
                         }
-                        else
+
+                        @for (var i = 0; i < modelAux.Meetings.Count; i++)
                         {
-                            @for (var i = 0; i < modelAux.Meetings.Count; i++)
-                            {
-                            <tr>
-                                <td>@modelAux.Meetings.ElementAt(i).Date</td>
-                                    @if (i == 0)
+                        <tr>
+                            <td>@modelAux.Meetings.ElementAt(i).Date</td>
+                                @if (i == 0)
+                                {
+                                    @if (User.IsInRole("abogado"))
                                     {
-                                        @if (User.IsInRole("abogado"))
-                                        {
-                                        <td><a class="btn btn-primary" href="~/Users/E dit/@modelAux.Id">Editar</a></td>
-                                        }
+                                    <td><a class="btn btn-primary" href="~/Users/E dit/@modelAux.Id">Editar</a></td>
                                     }
-                            </tr>
-                            }
+                                }
+                        </tr>
                         }
                     </tr>
                 }
