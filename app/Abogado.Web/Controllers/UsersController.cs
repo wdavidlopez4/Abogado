@@ -18,6 +18,7 @@ namespace Abogado.Web.Controllers
     public class UsersController : Controller
     {
         private readonly IMediator mediator;
+
         private readonly IMapObject mapObject;
 
         public UsersController(IMediator mediator, IMapObject mapObject)
@@ -34,13 +35,13 @@ namespace Abogado.Web.Controllers
                 await GetUserById(Id);
             }
             return View();
-
         }
 
         public IActionResult GetUsersByName(string filterName)
         {
             List<GetAllUsersByNameDTO> dto;
             List<UsersVM> usersVM = new();
+
             GetAllUsersByNameQuery query = new()
             {
                 FilterName = filterName,
@@ -55,6 +56,7 @@ namespace Abogado.Web.Controllers
         {
             GetUserIdDTO dto;
             List<UsersVM> listDTO = new();
+
             GetUserIdQuery query = new()
             {
                 Id = Id,
@@ -83,7 +85,6 @@ namespace Abogado.Web.Controllers
         [Authorize(Roles = "abogado")]
         public async Task<IActionResult> RegisterUser(RegisterUserVM user)
         {
-
             RegisterCommand command = new()
             {
                 Name = user.Name,
@@ -103,7 +104,6 @@ namespace Abogado.Web.Controllers
                 return View("Register", user);
 
             }
-
             return RedirectToAction("Index", "Users");
         }
 
@@ -112,6 +112,7 @@ namespace Abogado.Web.Controllers
         {
             ViewData["Excepcion"] = TempData["Excepcion"];
             GetUserIdDTO dto;
+
             GetUserIdQuery query = new()
             {
                 Id = Id,
@@ -149,7 +150,7 @@ namespace Abogado.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login(string email, string password)
         {
-            LoginDTO dto = new();
+            LoginDTO dto;
 
             List<Claim> claims;
 
@@ -181,7 +182,6 @@ namespace Abogado.Web.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
-
 
         /// <summary>
         /// Metodo para crear claims

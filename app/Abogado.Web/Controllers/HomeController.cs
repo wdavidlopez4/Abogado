@@ -13,7 +13,6 @@ namespace Abogado.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IMediator mediator;
 
-
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _logger = logger;

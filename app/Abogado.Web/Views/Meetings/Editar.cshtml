@@ -4,8 +4,7 @@
 @using (Html.BeginForm("Edit", "Meetings"))
 {
     <form>
-        <!-- Name input -->
-    <div class="form-outline mb-2">
+     <div class="form-outline mb-2">
             <label class="form-label" name="date" for="Fecha">Fecha</label>
             <input type="hidden" name="id" value="@Model.Id">
             <input type="datetime-local" name="date" id="Fecha" value="@Model.Date.ToString("yyyy-MM-ddTHH:mm")" class="form-control" required />

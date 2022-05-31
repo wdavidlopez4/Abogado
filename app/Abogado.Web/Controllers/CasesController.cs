@@ -52,7 +52,6 @@ namespace Abogado.Web.Controllers
         public async Task<IActionResult> RegisterCase(RegisterCaseVM registerCase)
         {
             string lawyerId;
-
             lawyerId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value;
 
             CreateCaseCommand command = new()
@@ -66,8 +65,6 @@ namespace Abogado.Web.Controllers
                 StartDate = registerCase.StartDate,
                 LawyerId = lawyerId,
             };
-
-
             await mediator.Send(command);
 
             return View("Index");
@@ -102,21 +99,23 @@ namespace Abogado.Web.Controllers
         public IActionResult GetUsers(string filterName)
         {
             TempData["Id"] = TempData["Id"];
-
             List<GetAllUsersByNameDTO> dto;
+
             GetAllUsersByNameQuery query = new()
             {
                 FilterName = filterName,
             };
 
             dto = mediator.Send(query).Result;
+
             return View("AssingCaseView", dto);
         }
 
         public async Task<IActionResult> GetCases(string filterName)
         {
-            List<CaseVM> cases = new();
+            List<CaseVM> cases;
             List<GetAllCasesByUserDTO> dto;
+
             GetAllCasesByUserQuery query = new()
             {
                 NameCase = filterName,
@@ -133,6 +132,7 @@ namespace Abogado.Web.Controllers
         {
             List<CaseVM> caseAux = new();
             GetCaseByUserIdDTO dto;
+
             string userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value;
             
             GetCaseByUserIdQuery query = new()
@@ -141,7 +141,6 @@ namespace Abogado.Web.Controllers
             };
 
             dto = await mediator.Send(query);
-
             caseAux.Add(mapObject.Map<GetCaseByUserIdDTO, CaseVM>(dto));
 
             return View("Index", caseAux);
@@ -151,6 +150,7 @@ namespace Abogado.Web.Controllers
         public async Task<IActionResult> Edit(string Id)
         {
             GetByCaseIdDTO dto;
+
             GetByCaseIdQuery query = new()
             {
                 Id = Id,

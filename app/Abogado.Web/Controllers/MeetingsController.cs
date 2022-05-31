@@ -32,20 +32,20 @@ namespace Abogado.Web.Controllers
         {
             ViewData["Excepcion"] = TempData["Excepcion"];
             var userIdAux = GetClaim("Id");
-
             List<GetAllMeetingsByUserIdDTO> dto;
             List<MeetingsUsersVM> listMeetingUserVM;
+
             GetAllMeetingsByUserName query = new()
             {
                 UserId = userIdAux,
             };
 
             dto = mediator.Send(query).Result;
+
             listMeetingUserVM = mapObject.Map<List<GetAllMeetingsByUserIdDTO>, List<MeetingsUsersVM>>(dto);
 
             return View("Index", listMeetingUserVM);
         }
-
 
         public IActionResult Crear()
         {
@@ -169,7 +169,6 @@ namespace Abogado.Web.Controllers
 
             return View("Index", listMeetingUserVM);
         }
-
     }
 }
 
