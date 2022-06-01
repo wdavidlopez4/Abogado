@@ -49,6 +49,7 @@ namespace Abogado.Web.Controllers
         }
 
         [Authorize(Roles = "abogado")]
+        [HttpPost]
         public async Task<IActionResult> RegisterCase(RegisterCaseVM registerCase)
         {
             string lawyerId;
@@ -61,7 +62,7 @@ namespace Abogado.Web.Controllers
                 Trial = registerCase.Trial,
                 DivorceForm = registerCase.DivorceForm,
                 DivorceMechanism = registerCase.DivorceMechanism,
-                //Archivo = registerCase.Archivo,
+                Archivo = registerCase.Archivo,
                 StartDate = registerCase.StartDate,
                 LawyerId = lawyerId,
             };

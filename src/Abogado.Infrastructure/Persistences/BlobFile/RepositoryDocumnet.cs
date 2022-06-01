@@ -15,7 +15,7 @@ namespace Abogado.Infrastructure.Persistences.BlobFile
             Random rnd = new();
             int rndx = rnd.Next(0, 1000000);
 
-            string ruta = Path.Combine(Directory.GetCurrentDirectory(), "CasosPDF", rndx + ".pdf");
+            string ruta = Path.Combine(Directory.GetCurrentDirectory(), "Assets/CasosPDF", rndx + ".pdf");
 
             using var stream = new FileStream(ruta, FileMode.Create);
             await archivo.CopyToAsync(stream);

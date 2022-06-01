@@ -23,7 +23,7 @@ namespace Abogado.Application.CasesServices.CreateCase
 
         public DivorceMechanism DivorceMechanism { get; set; }
 
-        public IFormFile Archivo { get; set; }
+        public IFormCollection Archivo { get; set; }
 
         public DateTime StartDate { get; set; }
     }

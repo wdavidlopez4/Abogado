@@ -1,18 +1,11 @@
-﻿@using (Html.BeginForm("RegisterCase", "Cases"))
-{
-    <form>
+﻿@model RegisterCaseVM
+
+    <form method="post" asp-controller="Cases" asp-action="RegisterCase" enctype="multipart/form-data" class="form-group">
         <div class="row mb-4">
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example1">Nombre</label>
-                    @if (Model == null)
-                    {
-                        <input type="text" id="form6Example1" name="CaseName" class="form-control" required />
-                    }
-                    else
-                    {
-                        <input type="text" id="form6Example1" name="CaseName" value="@Model.Name" class="form-control" required />
-                    }
+                    <input type="text" id="form6Example1" name="CaseName" class="form-control" required />
                 </div>
             </div>
 
@@ -60,10 +53,9 @@
             <div class="row mt-4">
                 <div class="col-sm-6">
                     <label for="exampleFormControlFile1">Archivo de Caso</label>
-                    <input type="file" name="Archivo" class="form-control-file" id="exampleFormControlFile1">
+                    <input asp-for="Archivo" type="file" name="Archivo" class="form-control-file" id="exampleFormControlFile1">
                 </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary  mb-4 col-12 ">Crear</button>
     </form>
-}

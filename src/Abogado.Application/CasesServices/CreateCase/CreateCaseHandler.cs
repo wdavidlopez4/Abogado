@@ -30,9 +30,9 @@ namespace Abogado.Application.CasesServices.CreateCase
             Guard.Against.Null(request, nameof(request));
 
             //subimos, guardamos y creamos el archivo
-            //ruta = await repositoryDocumnet.SubirArchivo(request.Archivo);
-            //document = FileDocument.Build(filePath: ruta);
-            //await repository.Save<FileDocument>(document);
+            ruta = await repositoryDocumnet.SubirArchivo(request.Archivo.Files.FirstOrDefault());
+            document = FileDocument.Build(filePath: ruta);
+            await repository.Save<FileDocument>(document);
 
             //Crear caso y gurdamos
             caseAux = Case.Build(
@@ -41,7 +41,7 @@ namespace Abogado.Application.CasesServices.CreateCase
                  trial: request.Trial,
                  divorceForm: request.DivorceForm,
                  divorceMechanism: request.DivorceMechanism,
-                 fileId: Guid.Parse("6019353c-2604-414d-a90f-c437066b558e"),
+                 fileId: document.Id,
                  startDate: request.StartDate);
 
             if (repository.Exists<User>(x => x.Id.ToString() == request.LawyerId) is false)
