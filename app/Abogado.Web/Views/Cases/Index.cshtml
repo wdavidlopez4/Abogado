@@ -70,6 +70,14 @@
                                     <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
                                     <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
                                 }
+
+                                <th scope="row">
+                                    <a class="btn btn-outline-info"
+                                       asp-area=""
+                                       asp-controller="Cases"
+                                       asp-action="DownloadFile"
+                                       asp-route-CasoId="@modelAux.Id">descargar</a>
+                                </th>
                             }
                         </tr>
                     }

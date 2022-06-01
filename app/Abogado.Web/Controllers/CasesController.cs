@@ -1,5 +1,6 @@
 ﻿using Abogado.Application.CasesServices.AssignUser;
 using Abogado.Application.CasesServices.CreateCase;
+using Abogado.Application.CasesServices.DownloadFile;
 using Abogado.Application.CasesServices.GetAllCasesByUser;
 using Abogado.Application.CasesServices.GetByCaseId;
 using Abogado.Application.CasesServices.GetCaseByUserId;
@@ -177,6 +178,20 @@ namespace Abogado.Web.Controllers
             await mediator.Send(command);
 
             return View("Index");
+        }
+
+        [HttpGet]
+        public async Task<FileResult> DownloadFile(string CasoId)
+        {
+
+            DownloadFileQuery command = new()
+            {
+                CasoId = CasoId
+            };
+
+            var fileStream = await mediator.Send(command);
+
+            return File(fileStream.File, "application/pdf", "caso_archivo.pdf");
         }
     }
 }
