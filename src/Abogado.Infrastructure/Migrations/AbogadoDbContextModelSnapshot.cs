@@ -50,6 +50,9 @@ namespace Abogado.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(36)");
 
+                    b.Property<bool>("IsPrincipalCase")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 

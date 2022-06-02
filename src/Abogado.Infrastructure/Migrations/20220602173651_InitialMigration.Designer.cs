@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abogado.Infrastructure.Migrations
 {
     [DbContext(typeof(AbogadoDbContext))]
-    [Migration("20220529021843_InitialMigration")]
+    [Migration("20220602173651_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace Abogado.Infrastructure.Migrations
                     b.Property<string>("FileId")
                         .IsRequired()
                         .HasColumnType("varchar(36)");
+
+                    b.Property<bool>("IsPrincipalCase")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");

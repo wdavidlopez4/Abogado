@@ -176,7 +176,15 @@ namespace Abogado.Web.Controllers
                 IsSave = editCase.IsSave,
             };
 
-            await mediator.Send(command);
+            try
+            {
+                await mediator.Send(command);
+            }
+            catch (Exception e)
+            {
+                TempData["Excepcion"] = e.Message;
+                return View("Index");
+            }
 
             return View("Index");
         }

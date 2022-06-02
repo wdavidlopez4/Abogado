@@ -171,7 +171,8 @@ namespace Abogado.Web.Controllers
             }
             catch (Exception e)
             {
-                TempData["Excepcion"] = e.Message;
+                
+                TempData["Excepcion"] = e.Message.Substring(e.Message.IndexOf(".")+1);
             }
             return RedirectToAction("Index", "Home");
 

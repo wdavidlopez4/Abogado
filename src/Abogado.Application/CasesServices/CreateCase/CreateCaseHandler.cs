@@ -44,6 +44,8 @@ namespace Abogado.Application.CasesServices.CreateCase
                  fileId: document.Id,
                  startDate: request.StartDate);
 
+            caseAux.SetIsPrincipalCase(true);
+
             if (repository.Exists<User>(x => x.Id.ToString() == request.LawyerId) is false)
                 throw new Exception("El usuario no existe");
 

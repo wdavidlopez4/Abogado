@@ -68,6 +68,7 @@ namespace Abogado.Infrastructure.Migrations
                     DivorceMechanism = table.Column<int>(type: "int", nullable: false),
                     FileId = table.Column<string>(type: "varchar(36)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsPrincipalCase = table.Column<bool>(type: "bit", nullable: false),
                     CaseId = table.Column<string>(type: "varchar(36)", nullable: true)
                 },
                 constraints: table =>

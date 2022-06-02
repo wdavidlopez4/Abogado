@@ -1,6 +1,14 @@
 ﻿@using Abogado.Application.CasesServices.GetAllCasesByUser
 @model List<CaseVM>
 
+@if (TempData.ContainsKey("Excepcion"))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["Excepcion"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 @if (User.IsInRole("abogado"))
 {
     <button class="btn btn-primary mb-2" onclick="location.href='@Url.Action("Register", "Cases")'">Crear Caso</button>
@@ -71,14 +79,13 @@
                                 @if (modelAux.Users.Count == 2)
                                 {
                                     <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                    <td><a class="btn btn-primary" href="~/Cases/GetCasesNested/@modelAux.Id">Casos</a> </td>
                                 }
-                                else
+                                else if (modelAux.Users.Count > 0)
                                 {
                                     <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
-                                    <td><a class="btn btn-primary" href="~/Cases/GetCasesNested/@modelAux.Id">Casos</a> </td>
                                     <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
                                 }
-
 
                                 <th scope="row">
                                     <a class="btn btn-outline-info"

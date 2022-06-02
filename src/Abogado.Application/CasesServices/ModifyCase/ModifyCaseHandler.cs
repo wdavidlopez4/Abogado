@@ -39,6 +39,11 @@ namespace Abogado.Application.CasesServices.ModifyCase
             //Obtener caso
             caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.Users));
 
+            if (request.IsSave && request.Archivo == null)
+            {
+                throw new Exception("Si se añade a un historial de cambios se debe cargar un archivo");
+            }
+
             //Si hay un archivo
             if (request.Archivo != null)
             {

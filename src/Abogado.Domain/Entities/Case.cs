@@ -30,6 +30,8 @@ namespace Abogado.Domain.Entities
 
         public DateTime StartDate { get; private set; }
 
+        public bool IsPrincipalCase { get; private set; }
+
         private Case()
         {
 
@@ -75,6 +77,11 @@ namespace Abogado.Domain.Entities
                 throw new Exception("La reunion solo puede tener asociado un abogado y un cliente");
 
             Users.Add(user);
+        }
+
+        public void SetIsPrincipalCase(bool isPrincipal)
+        {
+            IsPrincipalCase = isPrincipal;
         }
 
         public void ChangeAtributtes(string caseName, string description, Guid? fileId = null)
