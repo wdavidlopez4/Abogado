@@ -160,7 +160,7 @@ namespace Abogado.Web.Controllers
 
             dto = await mediator.Send(query);
 
-            return View(dto);
+            return View("Edit", dto);
         }
 
         [HttpPost]

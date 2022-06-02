@@ -1,31 +1,29 @@
 ﻿@using Abogado.Application.CasesServices.GetByCaseId
 @model GetByCaseIdDTO
 
-@using (Html.BeginForm("EditCase", "Cases"))
-{
-    <form>
-        <div class="row mb-4">
-            <div class="col">
-                <div class="form-outline">
-                    <label class="form-label" for="form6Example1">Nombre</label>
-                    <input type="text" id="form6Example1" name="CaseName" value="@Model.CaseName" class="form-control" required />
-                    <input type="hidden" name="Id" value="@Model.Id"/>
-                </div>
-            </div>
-
-        </div>
+<form method="post" asp-controller="Cases" asp-action="EditCase" enctype="multipart/form-data" class="form-group>
+    <div class="row mb-4">
         <div class="col">
             <div class="form-outline">
-                <label class="form-label" for="form6Example2">Descripción</label>
-                <textarea class="form-control" name="Description" id="exampleFormControlTextarea1" rows="3" required> @Model.Description</textarea>
+                <label class="form-label" for="form6Example1">Nombre</label>
+                <input type="text" id="form6Example1" name="CaseName" value="@Model.CaseName" class="form-control" required />
+                <input type="hidden" name="Id" value="@Model.Id" />
             </div>
         </div>
-        <div class="row mt-4 mb-4">
-            <div class="col-sm-6">
-                <label for="exampleFormControlFile1">Archivo de Caso</label>
-                <input type="file" name="" class="form-control-file" id="exampleFormControlFile1">
-            </div>
-            <button type="submit" class="btn btn-primary  mt-4 col-12 ">Editar</button>
+
+    </div>
+    <div class="col">
+        <div class="form-outline">
+            <label class="form-label" for="form6Example2">Descripción</label>
+            <textarea class="form-control" name="Description" id="exampleFormControlTextarea1" rows="3" required> @Model.Description</textarea>
         </div>
-    </form>
-}
+    </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-sm-6">
+            <label for="exampleFormControlFile1">Archivo de Caso</label>
+            <input type="file" name="Archivo" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+        <button type="submit" class="btn btn-primary  mt-4 col-12 ">Editar</button>
+    </div>
+</form>
+
