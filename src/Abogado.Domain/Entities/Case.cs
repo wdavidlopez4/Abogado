@@ -47,6 +47,7 @@ namespace Abogado.Domain.Entities
             StartDate = startDate;
 
             this.Users = new();
+            this.CaseHistory = new();
         }
 
         public static Case Build(string caseName, string description, Trial trial, DivorceForm divorceForm,
@@ -57,6 +58,9 @@ namespace Abogado.Domain.Entities
 
         public void AddCaseHistory(Case caseHistory)
         {
+            if (CaseHistory is null)
+                this.CaseHistory = new();
+
             CaseHistory.Add(caseHistory);
         }
 

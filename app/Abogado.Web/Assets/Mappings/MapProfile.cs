@@ -27,12 +27,11 @@ namespace Abogado.Web.Assets.Mappings
             this.CreateMap<GetCaseByUserIdDTO.UserDTO, CaseVM.UserDTO>();
             this.CreateMap<GetAllCasesByUserDTO, CaseVM>();
             this.CreateMap<GetAllCasesByUserDTO.UserDTO, CaseVM.UserDTO>();
+            this.CreateMap<GetByCaseIdDTO.CaseDTO, CaseVM>();
 
 
-           // this.CreateMap<GetAllMeetingsByUserIdDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
             this.CreateMap<GetCaseByUserDTO, MeetingsUsersVM>();
             this.CreateMap<GetCaseByUserDTO.UserDTO, MeetingsUsersVM.UserDTO>();
-            //this.CreateMap<GetAllMeetingsByUserNameDTO.MeetingDTO, MeetingsUsersVM.MeetingDTO>();
         }
     }
 }

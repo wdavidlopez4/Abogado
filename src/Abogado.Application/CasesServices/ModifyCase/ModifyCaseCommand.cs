@@ -17,5 +17,7 @@ namespace Abogado.Application.CasesServices.ModifyCase
         public string Description { get; set; }
 
         public IFormFile Archivo { get; set; }
+
+        public bool IsSave { get; set; }
     }
 }

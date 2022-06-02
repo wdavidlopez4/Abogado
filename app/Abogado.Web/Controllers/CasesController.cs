@@ -136,10 +136,10 @@ namespace Abogado.Web.Controllers
             GetCaseByUserIdDTO dto;
 
             string userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value;
-            
+
             GetCaseByUserIdQuery query = new()
             {
-                    UserId = userId,
+                UserId = userId,
             };
 
             dto = await mediator.Send(query);
@@ -173,6 +173,7 @@ namespace Abogado.Web.Controllers
                 Description = editCase.Description,
                 Archivo = editCase.Archivo,
                 Id = editCase.Id,
+                IsSave = editCase.IsSave,
             };
 
             await mediator.Send(command);
@@ -192,6 +193,22 @@ namespace Abogado.Web.Controllers
             var fileStream = await mediator.Send(command);
 
             return File(fileStream.File, "application/pdf", "caso_archivo.pdf");
+        }
+
+        public async Task<IActionResult> GetCasesNested(string id)
+        {
+            GetByCaseIdDTO dto;
+            List<CaseVM> listCases;
+            GetByCaseIdQuery query = new()
+            {
+                Id = id,
+            };
+
+            dto = await mediator.Send(query);
+
+            listCases = mapObject.Map<List<GetByCaseIdDTO.CaseDTO>, List<CaseVM>>(dto.CaseHistory);
+
+            return View("Index", listCases);
         }
     }
 }

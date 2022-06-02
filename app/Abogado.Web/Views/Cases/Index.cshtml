@@ -23,14 +23,21 @@
             <th>Nombre del Caso</th>
             <th>Descripcion</th>
             <th>Fecha Inicial</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Rol</th>
-            <th></th>
-            <th></th>
+
+            @if (Model != null)
+            {
+                @if (Model.TrueForAll(x => x.Users.Count != 0))
+                {
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th></th>
+                    <th></th>
+                }
+            }
         </tr>
     </thead>
     <tbody>
@@ -53,7 +60,7 @@
                                 <td>@item.Email</td>
                                 <td>@item.Role</td>
                             }
-                            @if (modelAux.Users.Count < 2)
+                            @if (modelAux.Users.Count != 0 && modelAux.Users.Count < 2)
                             {
                                 <td>-------</td>
                                 <td>-------</td>
@@ -68,15 +75,17 @@
                                 else
                                 {
                                     <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                    <td><a class="btn btn-primary" href="~/Cases/GetCasesNested/@modelAux.Id">Casos</a> </td>
                                     <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
                                 }
 
+
                                 <th scope="row">
                                     <a class="btn btn-outline-info"
-                                       asp-area=""
-                                       asp-controller="Cases"
-                                       asp-action="DownloadFile"
-                                       asp-route-CasoId="@modelAux.Id">descargar</a>
+                   asp-area=""
+                   asp-controller="Cases"
+                   asp-action="DownloadFile"
+                   asp-route-CasoId="@modelAux.Id">descargar</a>
                                 </th>
                             }
                         </tr>

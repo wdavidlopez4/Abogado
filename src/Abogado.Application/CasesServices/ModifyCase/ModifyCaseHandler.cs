@@ -25,6 +25,7 @@ namespace Abogado.Application.CasesServices.ModifyCase
         public async Task<int> Handle(ModifyCaseCommand request, CancellationToken cancellationToken)
         {
             Case caseAux;
+            Case caseOld;
             FileDocument document;
             FileDocument newDocument;
 
@@ -36,7 +37,7 @@ namespace Abogado.Application.CasesServices.ModifyCase
                 throw new Exception("El caso no se encuentra registrado");
 
             //Obtener caso
-            caseAux = await repository.Get<Case>(x => x.Id.ToString() == request.Id);
+            caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.Users));
 
             //Si hay un archivo
             if (request.Archivo != null)
@@ -45,15 +46,31 @@ namespace Abogado.Application.CasesServices.ModifyCase
                 newDocument = FileDocument.Build(await repositoryDocument.SubirArchivo(request.Archivo));
                 await repository.Save<FileDocument>(newDocument);
 
-                //Eliminar el Documento existente
+                //Obtener el documento
                 document = await repository.Get<FileDocument>(x => x.Id.ToString() == caseAux.FileId.ToString());
-                repositoryDocument.EliminarArchivo(document.FilePath);
 
-                //Cambiar atributos
-                caseAux.ChangeAtributtes(request.CaseName, request.Description, newDocument.Id);
+                //Agregar caso al historial de casos si se desea
+                if (request.IsSave)
+                {
+                    caseOld = Case.Build(request.CaseName, request.Description, caseAux.Trial, caseAux.DivorceForm, caseAux.DivorceMechanism, caseAux.FileId, caseAux.StartDate);
+                    caseAux.Users.ForEach(x =>
+                    {
+                        caseOld.AddUser(x);
+                    });
 
-                //Eliminar FileDocument antiguo de la base de datos
-                await repository.Delete<FileDocument>(document);
+                    await repository.Save(caseOld);
+                    caseAux.AddCaseHistory(caseOld);
+                }
+                else
+                {
+                    repositoryDocument.EliminarArchivo(document.FilePath);
+
+                    //Cambiar atributos
+                    caseAux.ChangeAtributtes(request.CaseName, request.Description, newDocument.Id);
+
+                    //Eliminar FileDocument antiguo de la base de datos
+                    await repository.Delete<FileDocument>(document);
+                }
             }
             else
                 caseAux.ChangeAtributtes(request.CaseName, request.Description);
