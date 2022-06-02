@@ -56,7 +56,7 @@
             <div class="col">
                 <div class="form-outline">
                     <label class="form-label" for="form6Example2">Contraseña</label>
-                    <input type="password" id="form6Example2" name="Password" class="form-control" required />
+                    <input type="password" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$" title="entre 8 y 16 caracteres, un dígito, una minúscula, una mayúscula y al menos un caracter no alfanumérico" id="form6Example2" name="Password" class="form-control" required />
                 </div>
             </div>
         </div>
