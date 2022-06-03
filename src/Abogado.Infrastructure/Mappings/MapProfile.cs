@@ -1,4 +1,5 @@
 ﻿using Abogado.Application.CasesServices.GetAllCasesByUser;
+using Abogado.Application.CasesServices.GetAllCasesByUserId;
 using Abogado.Application.CasesServices.GetByCaseId;
 using Abogado.Application.CasesServices.GetCaseByUserId;
 using Abogado.Application.MeetingServices.GetAllMeetingsByUserId;
@@ -43,6 +44,8 @@ namespace Abogado.Infrastructure.Mappings
             this.CreateMap<User, GetCaseByUserIdDTO.UserDTO>();
             this.CreateMap<Case, GetCaseByUserIdDTO>();
             this.CreateMap<Case, GetByCaseIdDTO.CaseDTO>();
+            this.CreateMap<Case, GetAllCasesByUserIdDTO>();
+            this.CreateMap<User, GetAllCasesByUserIdDTO.UserDTO>();
             
         }
     }

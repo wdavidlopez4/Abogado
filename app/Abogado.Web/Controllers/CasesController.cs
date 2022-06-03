@@ -2,6 +2,7 @@
 using Abogado.Application.CasesServices.CreateCase;
 using Abogado.Application.CasesServices.DownloadFile;
 using Abogado.Application.CasesServices.GetAllCasesByUser;
+using Abogado.Application.CasesServices.GetAllCasesByUserId;
 using Abogado.Application.CasesServices.GetByCaseId;
 using Abogado.Application.CasesServices.GetCaseByUserId;
 using Abogado.Application.CasesServices.ModifyCase;
@@ -34,13 +35,32 @@ namespace Abogado.Web.Controllers
         {
             if (HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value == Role.cliente.ToString())
             {
-                await GetCasesByUserId();
+                string userId;
+                userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value;
+                await GetAllCasesByUserId(userId);
             }
             else
             {
                 return View();
             }
             return View();
+        }
+
+
+        public async Task<IActionResult> GetAllCasesByUserId(string userId)
+        {
+            List<CaseVM> cases;
+            List<GetAllCasesByUserIdDTO> dto;
+            GetAllCasesByUserIdQuery query = new()
+            {
+                UserId = userId,
+            };
+
+            dto = await mediator.Send(query);
+
+            cases = mapObject.Map<List<GetAllCasesByUserIdDTO>, List<CaseVM>>(dto);
+
+            return View("Index", cases);
         }
 
         [Authorize(Roles = "abogado")]
