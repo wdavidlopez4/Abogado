@@ -84,11 +84,14 @@ namespace Abogado.Domain.Entities
             IsPrincipalCase = isPrincipal;
         }
 
-        public void ChangeAtributtes(string caseName, string description, Guid? fileId = null)
+        public void ChangeAtributtes(string caseName, string description, Trial trial, DivorceForm divorceForm, DivorceMechanism divorceMechanism, Guid? fileId = null)
         {
             CaseName = Guard.Against.NullOrEmpty(caseName, nameof(caseName));
             Description = Guard.Against.NullOrEmpty(description);
-            FileId = fileId != null ? fileId.Value : this.FileId;
+            Trial = trial;
+            DivorceForm = DivorceForm;
+            DivorceMechanism = divorceMechanism;
+            FileId = fileId != null ? fileId.Value : FileId;
         }
     }
 

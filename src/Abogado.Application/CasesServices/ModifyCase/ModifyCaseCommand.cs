@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Abogado.Domain.Enums;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,12 @@ namespace Abogado.Application.CasesServices.ModifyCase
         public string CaseName { get; set; }
 
         public string Description { get; set; }
+
+        public Trial Trial { get; set; }
+
+        public DivorceForm DivorceForm { get; set; }
+
+        public DivorceMechanism DivorceMechanism { get; set; }
 
         public IFormFile Archivo { get; set; }
 

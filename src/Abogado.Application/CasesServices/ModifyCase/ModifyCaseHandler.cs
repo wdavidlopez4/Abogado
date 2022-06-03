@@ -71,14 +71,14 @@ namespace Abogado.Application.CasesServices.ModifyCase
                     repositoryDocument.EliminarArchivo(document.FilePath);
 
                     //Cambiar atributos
-                    caseAux.ChangeAtributtes(request.CaseName, request.Description, newDocument.Id);
+                    caseAux.ChangeAtributtes(request.CaseName, request.Description, request.Trial, request.DivorceForm, request.DivorceMechanism, newDocument.Id);
 
                     //Eliminar FileDocument antiguo de la base de datos
                     await repository.Delete<FileDocument>(document);
                 }
             }
             else
-                caseAux.ChangeAtributtes(request.CaseName, request.Description);
+                caseAux.ChangeAtributtes(request.CaseName, request.Description, request.Trial, request.DivorceForm, request.DivorceMechanism);
 
             //Guardar entidad
             await repository.Update<Case>(caseAux);

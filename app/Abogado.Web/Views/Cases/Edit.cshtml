@@ -12,8 +12,35 @@
                 <input type="hidden" name="Id" value="@Model.Id" />
             </div>
         </div>
-
+        <div class="col">
+            <div class="form-outline">
+                <label for="exampleDataList" class="form-label">Trial</label>
+                <select class="form-select" name="Trial" required>
+                    <option value="0">Inicio del Divorcio</option>
+                </select>
+            </div>
+        </div>
     </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="form-outline">
+                <label class="form-label" for="form6Example1">Forma de Divorcio</label>
+                <select class="form-select" name="Role" required>
+                    <option value="0">Voluntario</option>
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-outline">
+                <label for="exampleDataList" class="form-label">Mecanismo Divorcio</label>
+                <select class="form-select" name="DivorceMechanism" required>
+                    <option value="0">Disolucion Natural</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="col">
         <div class="form-outline">
             <label class="form-label" for="form6Example2">Descripción</label>
