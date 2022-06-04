@@ -11,7 +11,7 @@ AbogadoStartup.SetUp(builder.Services, builder.Configuration);
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromSeconds(50);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

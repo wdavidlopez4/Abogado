@@ -228,7 +228,7 @@ namespace Abogado.Web.Controllers
                 return View("Index");
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

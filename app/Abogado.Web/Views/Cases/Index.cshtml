@@ -33,13 +33,13 @@
             <th>Fecha Inicial</th>
             <th>Trial</th>
 
-            @* @if(Model.First().CaseHistory == null){
-                <th>Archivo</th>
-                <th></th>
-                }*@
-
-            @if (Model != null)
+            @if (Model != null && Model.Count > 0)
             {
+                @if (Model.First().CaseHistory == null)
+                {
+                    <th>Archivo</th>
+                    <th></th>
+                }
                 @if (Model.TrueForAll(x => x.Users.Count != 0))
                 {
                     <th>Nombre</th>
@@ -53,6 +53,7 @@
                     <th></th>
                     <th></th>
                 }
+
             }
         </tr>
     </thead>
