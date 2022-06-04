@@ -1,6 +1,7 @@
 ﻿using Abogado.Application.CasesServices.AssignUser;
 using Abogado.Application.CasesServices.CreateCase;
 using Abogado.Application.CasesServices.DownloadFile;
+using Abogado.Application.CasesServices.GetAllCases;
 using Abogado.Application.CasesServices.GetAllCasesByUser;
 using Abogado.Application.CasesServices.GetAllCasesByUserId;
 using Abogado.Application.CasesServices.GetByCaseId;
@@ -41,9 +42,26 @@ namespace Abogado.Web.Controllers
             }
             else
             {
-                return View();
+                await GetAllCases();
             }
             return View();
+        }
+
+        public async Task<IActionResult> GetAllCases()
+        {
+            List<CaseVM> cases;
+
+            List<GetAllCasesDTO> dto;
+            GetAllCasesQuery query = new()
+            {
+
+            };
+
+            dto = await mediator.Send(query);
+
+            cases = mapObject.Map<List<GetAllCasesDTO>, List<CaseVM>>(dto);
+
+            return View("Index", cases);
         }
 
 
