@@ -6,6 +6,7 @@ using Abogado.Application.CasesServices.GetAllCasesByUser;
 using Abogado.Application.CasesServices.GetAllCasesByUserId;
 using Abogado.Application.CasesServices.GetByCaseId;
 using Abogado.Application.CasesServices.GetCaseByUserId;
+using Abogado.Application.CasesServices.GetCasesOfCase;
 using Abogado.Application.CasesServices.ModifyCase;
 using Abogado.Application.UsersServices.GetAllUsersByName;
 using Abogado.Domain.Enums;
@@ -64,7 +65,7 @@ namespace Abogado.Web.Controllers
             return View("Index", cases);
         }
 
-
+       
         public async Task<IActionResult> GetAllCasesByUserId(string userId)
         {
             List<CaseVM> cases;
@@ -210,6 +211,9 @@ namespace Abogado.Web.Controllers
                 CaseName = editCase.CaseName,
                 Description = editCase.Description,
                 Archivo = editCase.Archivo,
+                Trial = editCase.Trial,
+                DivorceForm = editCase.DivorceForm,
+                DivorceMechanism = editCase.DivorceMechanism,
                 Id = editCase.Id,
                 IsSave = editCase.IsSave,
             };
@@ -243,16 +247,16 @@ namespace Abogado.Web.Controllers
 
         public async Task<IActionResult> GetCasesNested(string id)
         {
-            GetByCaseIdDTO dto;
+            List<GetCasesOfCaseDTO> dto;
             List<CaseVM> listCases;
-            GetByCaseIdQuery query = new()
+            GetCasesOfCaseQuery query = new()
             {
-                Id = id,
+                FatherCaseId = id,
             };
 
             dto = await mediator.Send(query);
 
-            listCases = mapObject.Map<List<GetByCaseIdDTO.CaseDTO>, List<CaseVM>>(dto.CaseHistory);
+            listCases = mapObject.Map<List<GetCasesOfCaseDTO>, List<CaseVM>>(dto);
 
             return View("Index", listCases);
         }

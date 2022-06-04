@@ -28,6 +28,10 @@ namespace Abogado.Domain.Entities
 
         public FileDocument File { get; private set; }
 
+        public Guid? CaseId { get; private set; }
+
+        public Case? CaseFather { get; private set; }
+
         public DateTime StartDate { get; private set; }
 
         public bool IsPrincipalCase { get; private set; }

@@ -1,8 +1,6 @@
 ﻿@using Abogado.Application.CasesServices.GetByCaseId
 @model GetByCaseIdDTO
 
-
-
 <form method="post" asp-controller="Cases" asp-action="EditCase" enctype="multipart/form-data" class="form-group">
     <div class="row mb-4">
         <div class="col">
@@ -15,8 +13,17 @@
         <div class="col">
             <div class="form-outline">
                 <label for="exampleDataList" class="form-label">Trial</label>
-                <select class="form-select" name="Trial" required>
+                <select class="form-select" name="Trial" required id="trial">
                     <option value="0">Inicio del Divorcio</option>
+                    <option value="1">Introduccion de la Demanda</option>
+                    <option value="2">Áviso del Cónyuge</option>
+                    <option value="3">Respuesta del Cónyuge Notificado</option>
+                    <option value="4">Intercambio de Documento e Información</option>
+                    <option value="5">Proceso de Mediación</option>
+                    <option value="6">Aceptación del Acuerdo</option>
+                    <option value="7">Acta de Divorcio</option>
+                    <option value="8">Juicio de Divorcio</option>
+                    <option value="9">Apelacion</option>
                 </select>
             </div>
         </div>
@@ -60,6 +67,6 @@
         <button type="submit" class="btn btn-primary  mt-4 col-12 ">Editar</button>
     </div>
 
-
 </form>
+
 

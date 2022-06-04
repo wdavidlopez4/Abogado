@@ -1,4 +1,5 @@
 ﻿using Abogado.Domain.Entities;
+using Abogado.Domain.Enums;
 using Abogado.Domain.Ports;
 using Ardalis.GuardClauses;
 using MediatR;
@@ -25,6 +26,10 @@ namespace Abogado.Application.CasesServices.ModifyCase
         public async Task<int> Handle(ModifyCaseCommand request, CancellationToken cancellationToken)
         {
             Case caseAux;
+            Trial lastCaseHistory = new();
+
+            Trial lastTrial;
+
             Case caseOld;
             FileDocument document;
             FileDocument newDocument;
@@ -37,7 +42,15 @@ namespace Abogado.Application.CasesServices.ModifyCase
                 throw new Exception("El caso no se encuentra registrado");
 
             //Obtener caso
-            caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.Users));
+            caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.Users), nameof(Case.CaseHistory));
+
+            if (caseAux.CaseHistory.Count > 0)
+                lastCaseHistory = caseAux.CaseHistory.OrderBy(x => x.Trial).Last().Trial;
+            
+            if (request.Trial < lastCaseHistory)
+            {
+                throw new Exception("El estado del caso no se puede retroceder");
+            }
 
             if (request.IsSave && request.Archivo == null)
             {
@@ -51,13 +64,10 @@ namespace Abogado.Application.CasesServices.ModifyCase
                 newDocument = FileDocument.Build(await repositoryDocument.SubirArchivo(request.Archivo));
                 await repository.Save<FileDocument>(newDocument);
 
-                //Obtener el documento
-                document = await repository.Get<FileDocument>(x => x.Id.ToString() == caseAux.FileId.ToString());
-
                 //Agregar caso al historial de casos si se desea
                 if (request.IsSave)
                 {
-                    caseOld = Case.Build(request.CaseName, request.Description, caseAux.Trial, caseAux.DivorceForm, caseAux.DivorceMechanism, caseAux.FileId, caseAux.StartDate);
+                    caseOld = Case.Build(request.CaseName, request.Description, request.Trial, request.DivorceForm, request.DivorceMechanism, newDocument.Id, DateTime.Now);
                     caseAux.Users.ForEach(x =>
                     {
                         caseOld.AddUser(x);
@@ -68,6 +78,8 @@ namespace Abogado.Application.CasesServices.ModifyCase
                 }
                 else
                 {
+                    //Obtener el documento
+                    document = await repository.Get<FileDocument>(x => x.Id.ToString() == caseAux.FileId.ToString());
                     repositoryDocument.EliminarArchivo(document.FilePath);
 
                     //Cambiar atributos

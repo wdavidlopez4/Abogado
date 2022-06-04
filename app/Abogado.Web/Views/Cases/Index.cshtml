@@ -31,8 +31,12 @@
             <th>Nombre del Caso</th>
             <th>Descripcion</th>
             <th>Fecha Inicial</th>
-            <th>Archivo</th>
-            <th></th>
+            <th>Trial</th>
+
+            @* @if(Model.First().CaseHistory == null){
+                <th>Archivo</th>
+                <th></th>
+                }*@
 
             @if (Model != null)
             {
@@ -65,6 +69,7 @@
                             <td>@modelAux.CaseName</td>
                             <td>@modelAux.Description</td>
                             <td>@modelAux.StartDate</td>
+                            <td>@modelAux.Trial.ToString()</td>
 
                             @foreach (var item in modelAux.Users)
                             {
@@ -83,15 +88,23 @@
 
                             @if (User.IsInRole("abogado"))
                             {
-                                @if (modelAux.Users.Count == 2)
+                                @if ((modelAux.Users.Count == 2) && modelAux.CaseHistory.Count > 0)
                                 {
-                                    <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                    var trial = modelAux.CaseHistory.OrderBy(x => x.Trial).Last().Trial;
+
+                                    @if (trial != Abogado.Domain.Enums.Trial.Apelacion)
+                                    {
+                                        <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                    }
                                     <td><a class="btn btn-primary" href="~/Cases/GetCasesNested/@modelAux.Id">Historico</a> </td>
                                 }
                                 else if (modelAux.Users.Count > 0)
                                 {
                                     <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
-                                    <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
+                                    @if (modelAux.Users.Count == 1)
+                                    {
+                                        <td><a class="btn btn-primary" href="~/Cases/AssingCaseView/@modelAux.Id">Asignar</a> </td>
+                                    }
                                 }
                             }
                             else if (modelAux.Users.Count > 0)

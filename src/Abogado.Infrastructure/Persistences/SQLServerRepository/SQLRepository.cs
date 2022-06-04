@@ -70,6 +70,17 @@ namespace Abogado.Infrastructure.Persistences.SQLServerRepository
                     .Include(nestedTwo)
                     .ToListAsync();
         }
+
+        public async Task<List<T>> GetAllNested<T>(Expression<Func<T, bool>> expressionConditional, string nested, string nestedTwo, string nestedTree) where T : Entity
+        {
+            return await context.Set<T>()
+                    .Where(expressionConditional)
+                    .Include(nested)
+                    .Include(nestedTwo)
+                    .Include(nestedTree)
+                    .ToListAsync();
+        }
+
         public async Task<T> GetNested<T>(Expression<Func<T, bool>> expression, string nested, string nestedSecond) where T : Entity
         {
             return await context.Set<T>()

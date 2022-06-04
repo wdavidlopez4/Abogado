@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Abogado.Infrastructure.Migrations
 {
     [DbContext(typeof(AbogadoDbContext))]
-    [Migration("20220602173651_InitialMigration")]
+    [Migration("20220604195554_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,7 @@ namespace Abogado.Infrastructure.Migrations
                         .HasColumnType("varchar(36)");
 
                     b.Property<string>("CaseId")
+                        .IsRequired()
                         .HasColumnType("varchar(36)");
 
                     b.Property<string>("CaseName")
@@ -161,15 +162,19 @@ namespace Abogado.Infrastructure.Migrations
 
             modelBuilder.Entity("Abogado.Domain.Entities.Case", b =>
                 {
-                    b.HasOne("Abogado.Domain.Entities.Case", null)
+                    b.HasOne("Abogado.Domain.Entities.Case", "CaseFather")
                         .WithMany("CaseHistory")
-                        .HasForeignKey("CaseId");
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Abogado.Domain.Entities.FileDocument", "File")
                         .WithMany()
                         .HasForeignKey("FileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CaseFather");
 
                     b.Navigation("File");
                 });

@@ -37,6 +37,10 @@ namespace Abogado.Infrastructure.Persistences.EF
                 .Property(p => p.FileId)
                 .HasColumnType("varchar");
 
+            modelBuilder.Entity<Case>()
+                .Property(p => p.CaseId)
+                .HasColumnType("varchar");
+
             modelBuilder.Entity<User>()
                 .Property(p => p.Id)
                 .HasColumnType("varchar");
