@@ -1,8 +1,10 @@
-﻿using Abogado.Application.UsersServices.GetAllUsersByName;
+﻿using Abogado.Application.UsersServices.GetAllUsers;
+using Abogado.Application.UsersServices.GetAllUsersByName;
 using Abogado.Application.UsersServices.GetUserId;
 using Abogado.Application.UsersServices.Login;
 using Abogado.Application.UsersServices.ModifyUser;
 using Abogado.Application.UsersServices.Register;
+using Abogado.Domain.Entities;
 using Abogado.Domain.Ports;
 using Abogado.Web.Models;
 using MediatR;
@@ -34,7 +36,28 @@ namespace Abogado.Web.Controllers
                 var Id = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id")?.Value;
                 await GetUserById(Id);
             }
+            else
+            {
+                await GetAllUsers();
+            }
             return View();
+        }
+
+
+        public async Task<IActionResult> GetAllUsers()
+        {
+            List<GetAllUsersDTO> dto;
+            List<UsersVM> users;
+            GetAllUsersQuery query = new()
+            {
+
+            };
+
+            dto = await mediator.Send(query);
+
+            users = mapObject.Map<List<GetAllUsersDTO>, List<UsersVM>>(dto);
+
+            return View("Index", users);
         }
 
         public IActionResult GetUsersByName(string filterName)
@@ -171,8 +194,8 @@ namespace Abogado.Web.Controllers
             }
             catch (Exception e)
             {
-                
-                TempData["Excepcion"] = e.Message.Substring(e.Message.IndexOf(".")+1);
+
+                TempData["Excepcion"] = e.Message.Substring(e.Message.IndexOf(".") + 1);
             }
             return RedirectToAction("Index", "Home");
 
