@@ -31,6 +31,8 @@
             <th>Nombre del Caso</th>
             <th>Descripcion</th>
             <th>Fecha Inicial</th>
+            <th>Archivo</th>
+            <th></th>
 
             @if (Model != null)
             {
@@ -42,6 +44,8 @@
                     <th>Nombre</th>
                     <th>Correo</th>
                     <th>Rol</th>
+                    <th>Archivo</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 }
@@ -74,6 +78,9 @@
                                 <td>-------</td>
                                 <td>-------</td>
                             }
+
+                            <td>@modelAux.File.FilePath.Split("\\").Last()</td>
+
                             @if (User.IsInRole("abogado"))
                             {
                                 @if (modelAux.Users.Count == 2)

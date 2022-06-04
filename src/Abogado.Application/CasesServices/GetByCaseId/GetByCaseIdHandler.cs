@@ -32,7 +32,7 @@ namespace Abogado.Application.CasesServices.GetByCaseId
             if (repository.Exists<Case>(x => x.Id.ToString() == request.Id) is false)
                 throw new Exception("El usuario no se encuentra registrado");
 
-            caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.CaseHistory), nameof(Case.Users));
+            caseAux = await repository.GetNested<Case>(x => x.Id.ToString() == request.Id, nameof(Case.CaseHistory), nameof(Case.Users),nameof(Case.File));
 
             //Mapear entidad y retornar
             return mapObject.Map<Case, GetByCaseIdDTO>(caseAux);

@@ -1,4 +1,5 @@
-﻿using Abogado.Domain.Enums;
+﻿using Abogado.Domain.Entities;
+using Abogado.Domain.Enums;
 
 namespace Abogado.Web.Models
 {
@@ -21,6 +22,8 @@ namespace Abogado.Web.Models
         public DivorceMechanism DivorceMechanism { get; set; }
 
         public string FileId { get; set; }
+
+        public FileDocument File { get; set; }
 
         public DateTime StartDate { get; set; }
 

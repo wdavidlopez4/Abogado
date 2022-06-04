@@ -29,7 +29,7 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUserId
 
             Guard.Against.Null(request, nameof(request));
 
-            caseAux = await repository.GetAllNested<Case>(x => x.Users.Any(x => x.Id.ToString() == request.UserId) && x.IsPrincipalCase, nameof(Case.Users));
+            caseAux = await repository.GetAllNested<Case>(x => x.Users.Any(x => x.Id.ToString() == request.UserId) && x.IsPrincipalCase, nameof(Case.Users), nameof(File));
 
             return mapObject.Map<List<Case>, List<GetAllCasesByUserIdDTO>>(caseAux);
 

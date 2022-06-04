@@ -31,7 +31,7 @@ namespace Abogado.Application.CasesServices.GetAllCases
             Guard.Against.Null(request, nameof(request));
 
             //Obtener todos los casos
-            cases = await repository.GetAllNested<Case>(x => x.IsPrincipalCase, nameof(Case.Users));
+            cases = await repository.GetAllNested<Case>(x => x.IsPrincipalCase, nameof(Case.Users), nameof(Case.File));
 
             //Mapear y retornar
             return mapObject.Map<List<Case>, List<GetAllCasesDTO>>(cases);

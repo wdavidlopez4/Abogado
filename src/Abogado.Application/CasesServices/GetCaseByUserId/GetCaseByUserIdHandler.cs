@@ -31,7 +31,7 @@ namespace Abogado.Application.CasesServices.GetCaseByUserId
             if (repository.Exists<User>(x => x.Id.ToString() == request.UserId) is false)
                 throw new Exception("El usuario no existe");
 
-            caseAux = await repository.GetNested<Case>(x => x.Users.Any(x => x.Id.ToString() == request.UserId), nameof(Case.Users));
+            caseAux = await repository.GetNested<Case>(x => x.Users.Any(x => x.Id.ToString() == request.UserId), nameof(Case.Users), nameof(File));
 
             return mapObject.Map<Case, GetCaseByUserIdDTO>(caseAux);
 

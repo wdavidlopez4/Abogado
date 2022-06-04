@@ -1,4 +1,5 @@
-﻿using Abogado.Domain.Enums;
+﻿using Abogado.Domain.Entities;
+using Abogado.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
         public DivorceMechanism DivorceMechanism { get;  set; }
 
         public string FileId { get;  set; }
+
+        public FileDocument File { get; set; }
 
         public DateTime StartDate { get; set; }
 

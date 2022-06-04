@@ -30,7 +30,7 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
             //Verificar que la peticion no se encuentre nula
             Guard.Against.Null(request, nameof(request));
 
-            cases = await repository.GetAllNested<Case>(x => x.CaseName.Contains(request.NameCase) && x.IsPrincipalCase == true, nameof(Case.Users));
+            cases = await repository.GetAllNested<Case>(x => x.CaseName.Contains(request.NameCase) && x.IsPrincipalCase == true, nameof(Case.Users), nameof(File));
 
             //Mapear y retornar entidad
             return mapObject.Map<List<Case>, List<GetAllCasesByUserDTO>>(cases);
