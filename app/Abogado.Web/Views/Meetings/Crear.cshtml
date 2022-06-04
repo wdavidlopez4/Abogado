@@ -5,7 +5,7 @@
         <!-- Name input -->
     <div class="form-outline mb-2">
             <label class="form-label" name="labelDate"  for="Fecha">Fecha</label>
-            <input type="datetime-local" name="date" id="Fecha" class="form-control" required/>
+            <input type="datetime-local" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" name="date" id="Fecha" class="form-control" required/>
         </div>
         <button type="submit" class="btn btn-primary">Crear</button>
     </form>
