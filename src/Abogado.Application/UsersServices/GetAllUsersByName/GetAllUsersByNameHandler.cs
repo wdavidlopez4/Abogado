@@ -28,8 +28,10 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
             //Verificar que la peticion no se encuentre nula
             Guard.Against.Null(request, nameof(request));
 
+            string[] name = request.FilterName.Split(" ");
+
             //Obtener los usuario por nombre
-            users = await repository.GetAllNested<User>(x => x.Name.Contains(request.FilterName), nameof(User.Meetings), nameof(User.Cases));
+            users = await repository.GetAllNested<User>(x => x.Name.Contains(name.First()) || x.Lastname.Contains(name.Last()) ,nameof(User.Meetings), nameof(User.Cases));
 
             //Mapear objeto y retornar
             return mapObject.Map<List<User>, List<GetAllUsersByNameDTO>>(users);

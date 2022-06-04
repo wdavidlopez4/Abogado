@@ -10,5 +10,6 @@ namespace Abogado.Application.UsersServices.GetAllUsersByName
     public class GetAllUsersByNameQuery : IRequest<List<GetAllUsersByNameDTO>>
     {
         public string FilterName { get; set; }
+
     }
 }
