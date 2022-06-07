@@ -16,5 +16,7 @@ namespace Abogado.Application.UsersServices.ModifyUser
         public string LastName  { get; set; }
 
         public string Mail { get; set; }
+
+        public string Password { get; set; }
     }
 }

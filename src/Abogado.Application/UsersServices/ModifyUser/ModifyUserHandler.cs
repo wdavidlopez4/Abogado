@@ -15,14 +15,18 @@ namespace Abogado.Application.UsersServices.ModifyUser
     {
         private readonly IRepository repository;
 
-        public ModifyUserHandler(IRepository repository)
+        private readonly ISecurity security;
+
+        public ModifyUserHandler(IRepository repository, ISecurity security)
         {
             this.repository = repository;
+            this.security = security;
         }
 
         public async Task<int> Handle(ModifyUserCommand request, CancellationToken cancellationToken)
         {
             User user;
+            string encriptPassword;
 
             //Verificar que la peticion no este nula
             Guard.Against.Null(request, nameof(request));
@@ -38,8 +42,10 @@ namespace Abogado.Application.UsersServices.ModifyUser
             if (repository.Exists<User>(x => x.Email == request.Mail) && user.Email != request.Mail)
                 throw new Exception("El correo ya se encuentra registrado");
 
+            encriptPassword = security.EncryptPassword(request.Password);
+
             //Cambiar atributos del usuario
-            user.ChangeAtributtes(request.Name, request.LastName, request.Mail);
+            user.ChangeAtributtes(request.Name, request.LastName, request.Mail, encriptPassword);
 
             await repository.Update<User>(user);
             await repository.Commit();

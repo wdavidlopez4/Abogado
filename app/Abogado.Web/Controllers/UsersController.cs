@@ -155,6 +155,7 @@ namespace Abogado.Web.Controllers
                 Name = user.Name,
                 LastName = user.Lastname,
                 Mail = user.Email,
+                Password = user.Password,
             };
 
             try
