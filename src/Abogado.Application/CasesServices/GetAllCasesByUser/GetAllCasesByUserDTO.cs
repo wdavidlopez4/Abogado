@@ -18,7 +18,7 @@ namespace Abogado.Application.CasesServices.GetAllCasesByUser
 
         public string Description { get;  set; }
 
-        public Trial Trial { get;  set; }
+        public Proceso Trial { get;  set; }
 
         public DivorceForm DivorceForm { get; set; }
 

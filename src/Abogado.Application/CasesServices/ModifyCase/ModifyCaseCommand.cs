@@ -17,7 +17,7 @@ namespace Abogado.Application.CasesServices.ModifyCase
 
         public string Description { get; set; }
 
-        public Trial Trial { get; set; }
+        public Proceso Trial { get; set; }
 
         public DivorceForm DivorceForm { get; set; }
 

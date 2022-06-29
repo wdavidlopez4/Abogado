@@ -26,9 +26,9 @@ namespace Abogado.Application.CasesServices.ModifyCase
         public async Task<int> Handle(ModifyCaseCommand request, CancellationToken cancellationToken)
         {
             Case caseAux;
-            Trial lastCaseHistory = new();
+            Proceso lastCaseHistory = new();
 
-            Trial lastTrial;
+            Proceso lastTrial;
 
             Case caseOld;
             FileDocument document;

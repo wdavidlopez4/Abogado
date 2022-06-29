@@ -92,9 +92,12 @@
                                 {
                                     var trial = modelAux.CaseHistory.OrderBy(x => x.Trial).Last().Trial;
 
-                                    @if (trial != Abogado.Domain.Enums.Trial.Apelacion)
+                                    @if (trial != Abogado.Domain.Enums.Proceso.Apelacion)
                                     {
                                         <td><a class="btn btn-primary" href="~/Cases/Edit/@modelAux.Id">Editar</a> </td>
+                                    }
+                                    @if(trial != Abogado.Domain.Enums.Proceso.Sim_Proceso){
+                                        
                                     }
                                     <td><a class="btn btn-primary" href="~/Cases/GetCasesNested/@modelAux.Id">Historico</a> </td>
                                 }

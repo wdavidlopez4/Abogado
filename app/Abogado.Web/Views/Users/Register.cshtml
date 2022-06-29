@@ -45,11 +45,11 @@
                     <label class="form-label" for="form6Example1">Correo</label>
                     @if (Model == null)
                     {
-                        <input type="text" id="form6Example1" name="Mail" class="form-control" required />
+                        <input type="email" id="form6Example1" name="Mail" class="form-control" required />
                     }
                     else
                     {
-                        <input type="text" id="form6Example1" name="Mail" value="@Model.Mail" class="form-control" required />
+                        <input type="email" id="form6Example1" name="Mail" value="@Model.Mail" class="form-control" required />
                     }
                 </div>
             </div>

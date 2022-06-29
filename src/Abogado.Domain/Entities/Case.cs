@@ -18,7 +18,7 @@ namespace Abogado.Domain.Entities
 
         public string Description { get; private set; }
 
-        public Trial Trial { get; private set; }
+        public Proceso Trial { get; private set; }
 
         public DivorceForm DivorceForm { get; private set; }
 
@@ -41,7 +41,7 @@ namespace Abogado.Domain.Entities
 
         }
 
-        private Case(string caseName, string description, Trial trial, DivorceForm divorceForm,
+        private Case(string caseName, string description, Proceso trial, DivorceForm divorceForm,
             DivorceMechanism divorceMechanism, Guid fileId, DateTime startDate)
         {
             CaseName = Guard.Against.NullOrEmpty(caseName, nameof(caseName));
@@ -56,7 +56,7 @@ namespace Abogado.Domain.Entities
             this.CaseHistory = new();
         }
 
-        public static Case Build(string caseName, string description, Trial trial, DivorceForm divorceForm,
+        public static Case Build(string caseName, string description, Proceso trial, DivorceForm divorceForm,
             DivorceMechanism divorceMechanism, Guid fileId, DateTime startDate)
         {
             return new Case(caseName, description, trial, divorceForm, divorceMechanism, fileId, startDate);
@@ -88,7 +88,7 @@ namespace Abogado.Domain.Entities
             IsPrincipalCase = isPrincipal;
         }
 
-        public void ChangeAtributtes(string caseName, string description, Trial trial, DivorceForm divorceForm, DivorceMechanism divorceMechanism, Guid? fileId = null)
+        public void ChangeAtributtes(string caseName, string description, Proceso trial, DivorceForm divorceForm, DivorceMechanism divorceMechanism, Guid? fileId = null)
         {
             CaseName = Guard.Against.NullOrEmpty(caseName, nameof(caseName));
             Description = Guard.Against.NullOrEmpty(description);

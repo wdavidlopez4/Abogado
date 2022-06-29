@@ -1,4 +1,5 @@
 ﻿using Abogado.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Abogado.Web.Models
 {
@@ -16,8 +17,10 @@ namespace Abogado.Web.Models
 
             public Role Role { get; set; }
 
+            [RegularExpression("[A-Za-z0-9]+", ErrorMessage = "* .. solo letras")]
             public string Name { get; set; }
 
+            [RegularExpression("[A-Za-z0-9]+", ErrorMessage = "* .. solo letras")]
             public string Lastname { get; set; }
 
             public string Email { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Abogado.Domain.Enums
 {
-    public enum Trial
+    public enum Proceso
     {
         Inicio_del_divorcio = 0,
         Introduccion_demanda = 1,
@@ -17,6 +17,7 @@ namespace Abogado.Domain.Enums
         Aceptacion_acuerdo = 6,
         Acta_divorcio=7,
         Juicio_divorcio=8,
-        Apelacion=9
+        Apelacion=9,
+        Sim_Proceso = 9
     }
 }

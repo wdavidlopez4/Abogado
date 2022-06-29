@@ -20,7 +20,7 @@ namespace Abogado.Application.CasesServices.GetByCaseId
 
         public string Description { get; set; }
 
-        public Trial Trial { get; set; }
+        public Proceso Trial { get; set; }
 
         public DivorceForm DivorceForm { get; set; }
 
@@ -55,7 +55,7 @@ namespace Abogado.Application.CasesServices.GetByCaseId
 
             public string Description { get; set; }
 
-            public Trial Trial { get; set; }
+            public Proceso Trial { get; set; }
 
             public DivorceForm DivorceForm { get; set; }
 
