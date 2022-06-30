@@ -18,6 +18,6 @@ namespace Abogado.Domain.Enums
         Acta_divorcio=7,
         Juicio_divorcio=8,
         Apelacion=9,
-        Sim_Proceso = 9
+        Fim_Proceso = 9
     }
 }
