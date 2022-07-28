@@ -1,2 +1,2 @@
 # Abogado
-Tesis de grado abogado by Anny
+Tesis de grado a medias abogado by Anny
