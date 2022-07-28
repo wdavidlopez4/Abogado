@@ -5,24 +5,9 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{F3C7E92F-37AD-4F32-96F4-37F13B9DA5B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abogado.Web", "app\Abogado.Web\Abogado.Web.csproj", "{19DB38C3-08D5-4305-900E-C0F77BDAECCD}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{19DB38C3-08D5-4305-900E-C0F77BDAECCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19DB38C3-08D5-4305-900E-C0F77BDAECCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19DB38C3-08D5-4305-900E-C0F77BDAECCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19DB38C3-08D5-4305-900E-C0F77BDAECCD}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{19DB38C3-08D5-4305-900E-C0F77BDAECCD} = {F3C7E92F-37AD-4F32-96F4-37F13B9DA5B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8E31A45-E31F-4B0C-A800-273BC22E79F1}
